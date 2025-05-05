@@ -11,7 +11,7 @@
 </head>
 <body>
     <a href="taskadd.php">Add Task</a>
-    <a href="">Edit Task</a>
-    <a href="">Remove Task</a>
+    <a href="taskedit.php">Edit Task</a>
+    <a href="taskremove.php">Remove Task</a>
 </body>
 </html>
