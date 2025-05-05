@@ -11,7 +11,7 @@
 </head>
 <body>
     <a href="store.php">Store</a>
-    <a href="task.php">Tasks</a>
+    <a href="task\taskhomepage.php">Task Homepage</a>
     <a href="calendar.php">Calendar</a>
 </body>
 </html>

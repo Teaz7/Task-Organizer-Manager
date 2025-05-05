@@ -1,5 +1,5 @@
 <?php
-    include 'init.php';
+    include '../init.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <a href="taskadd.php">Add Task</a>
+    <a href="">Edit Task</a>
+    <a href="">Remove Task</a>
 </body>
 </html>
