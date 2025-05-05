@@ -1,5 +1,6 @@
 <?php
     include 'init.php';
+    $_SESSION["currentUserEmail"] = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["loginEmail"];
@@ -15,6 +16,7 @@
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (($user['USER_Email'] == $email) && ($user['USER_Password'] === $password)) {
+                $_SESSION["currentUserEmail"] = $email;
                 header('Location: homepage.php');
             } else {
                 echo "Invalid Username or Password";
