@@ -1,9 +1,11 @@
 <?php include '../init.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $stmt = $conn->prepare("DELETE * FROM task WHERE TASK_Id=:val1");
+        $stmt = $conn->prepare("DELETE FROM task WHERE TASK_Id=:val1");
         $stmt->bindParam(':val1', $_POST["removeTaskId"]);
 
         $result = $stmt -> execute();
+
+        header('Location: taskhomepage.php');
     }
 ?>
 

@@ -56,7 +56,7 @@
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
         Task Name: <input type="text" name="AddTaskName" required>
         Task Description: <input type="text" name="AddTaskDescription" required>
-        Task Priority: <input type="checkbox" name="AddTaskPriority" required>
+        Task Priority: <input type="checkbox" name="AddTaskPriority">
         Task Date Start: <input type="date" name="AddTaskDateStart" required>
         Task Date End: <input type="date" name="AddTaskDateEnd" required>
         <input type="submit">

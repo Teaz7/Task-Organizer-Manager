@@ -49,6 +49,7 @@
             $stmt -> bindParam(":val4", $email);
 
             $result = $stmt -> execute();
+            header('Location: index.php');
         }
     }
 ?>

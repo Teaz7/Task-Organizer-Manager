@@ -1,3 +1,5 @@
+database name: tom_db
+
 CREATE TABLE USER (
     USER_Id INT AUTO_INCREMENT PRIMARY KEY,
     USER_FName VARCHAR(50),
