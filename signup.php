@@ -28,27 +28,29 @@
             $stmt -> bindParam(":val7", $occupation);
             $stmt -> bindParam(":val8", $establishment);
 
-            $result = $stmt -> execute();
+            $stmt -> execute();
+            $userId = $conn->lastInsertId();
 
             $stmt = $conn -> prepare(
                 "INSERT INTO store
                 (STORE_NumOfProducts, USER_Id) VALUES
-                (:val1, (SELECT USER_id from user WHERE USER_Email=:val2));
-                
-                INSERT INTO calendar
-                (CAL_NumOfTask, USER_Id) VALUES
-                (:val3, (SELECT USER_id from user WHERE USER_Email=:val4));"
+                (:val1, :val2);"
             );
+            $numOfProducts = 0;
+            $stmt -> bindParam(":val1", $numOfProducts);
+            $stmt -> bindParam(":val2", $userId);
+            $stmt -> execute();
 
-            $numValue1 = 0;
-            $numValue2 = 0;
-
-            $stmt -> bindParam(":val1", $numValue1);
-            $stmt -> bindParam(":val2", $email);
-            $stmt -> bindParam(":val3", $numValue2);
-            $stmt -> bindParam(":val4", $email);
-
-            $result = $stmt -> execute();
+            $stmt = $conn -> prepare(
+                "INSERT INTO calendar
+                (CAL_NumOfTask, USER_Id) VALUES
+                (:val1, :val2);"
+            );
+            $numOfTasks = 0;
+            $stmt -> bindParam(":val1", $numOfTasks);
+            $stmt -> bindParam(":val2", $userId);
+            $stmt -> execute();
+            
             header('Location: index.php');
         }
     }

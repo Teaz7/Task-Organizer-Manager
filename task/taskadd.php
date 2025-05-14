@@ -60,6 +60,7 @@
         Task Date Start: <input type="date" name="AddTaskDateStart" required>
         Task Date End: <input type="date" name="AddTaskDateEnd" required>
         <input type="submit">
-    </form>
+    </form> <br>
+    <a href="taskhomepage.php">Go Back</a>
 </body>
 </html>

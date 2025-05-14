@@ -17,6 +17,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="taskhomepage.php">Go Back</a> <br>
     <div>
         Search Id:
             <input type="text" onkeyup="search(this.value)">
@@ -33,10 +34,10 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState==4 && this.status==200) {
-                    document.getElementById("searchResults")innerHTML = this.responseText;
+                    document.getElementById("searchResults").innerHTML = this.responseText;
                 }
             }
-            xhr.open("GET", "view\search.php?keyword=" + input, true);
+            xhr.open("GET", "view/search.php?keyword=" + input, true);
             xhr.send();
         }
     </script>
