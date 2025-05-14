@@ -21,7 +21,7 @@
     <a href="task\taskhomepage.php">Task Homepage</a>
     <a href="calendar.php">Calendar</a>
     <a href="user\userhomepage.php">User Profile</a>
-    <a href="index.php">Log out</a>
+    <a href="index.php">Log Out</a>
     <br>
     <table>
         <thead>
