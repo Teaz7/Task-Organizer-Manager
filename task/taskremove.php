@@ -18,19 +18,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
         Enter Task Name to remove: <input type="text" name="removeTaskName">
         <input type="submit">
-    </form>
-    <a href="taskhomepage.php">Go Back</a> <br>
+    </form> <br>
 
     <div>
-        Search Id:
+        Search Task Name:
             <input type="text" onkeyup="search(this.value)">
     </div> <br>
     <div id="searchResults"></div>
+    <a href="taskhomepage.php">Go Back</a>
 
     <script>
         function search(input) {

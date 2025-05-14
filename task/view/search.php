@@ -3,7 +3,7 @@
     include '../../user/function/fetchUserId.php';
     $search = $_GET['keyword'];
     $stmt = $conn -> prepare (
-        "SELECT * FROM task WHERE TASK_Id LIKE :val1 AND USER_Id = :id"
+        "SELECT * FROM task WHERE TASK_Name LIKE :val1 AND USER_Id = :id"
     );
     $stmt -> execute([':val1' => "%$search%", ':id' => $id]);
     $result = $stmt -> fetchAll();

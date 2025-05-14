@@ -9,9 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../style.css"> 
 </head>
 <body>
-    <div>
+    <div class="user-profile">
         <h3>USER PROFILE</h3>
         ID: <?= $result["USER_Id"] ?> <br>
         Username: <?= $result["USER_FName"]." ".$result["USER_LName"] ?> <br>
@@ -19,11 +20,11 @@
         Email Address: <?= $result["USER_Email"] ?> <br>
         Occupation: <?= $result["USER_Occupation"] ?> <br>
         Establishment: <?= $result["USER_Establishment"] ?> <br>
-        Current Points: <?= $result["USER_Points"] ?> <br><br>
+        Current Points: <?= $result["USER_Points"]." Points" ?> <br><br>
     </div>
-    <a href="useredit.php">Edit Account Details</a> <br>
-    <a href="userremove.php">Remove Account</a> <br><br>
-    <a href="../homepage.php">Go Back</a> <br>
-    <a href="../index.php">Log Out</a> <br>
+    <a href="useredit.php">Edit Account Details</a>
+    <a href="userremove.php">Remove Account</a>
+    <a href="../homepage.php">Go Back</a>
+    <a href="../index.php">Log Out</a>
 </body>
 </html>

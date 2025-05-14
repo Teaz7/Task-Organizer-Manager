@@ -15,13 +15,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="store.php">Store</a>
-    <a href="task\taskhomepage.php">Task Homepage</a>
-    <a href="calendar.php">Calendar</a>
-    <a href="user\userhomepage.php">User Profile</a>
-    <a href="index.php">Log Out</a>
+    <div>
+        <a href="store.php">Store</a>
+        <a href="task\taskhomepage.php">Task Homepage</a>
+        <a href="calendar.php">Calendar</a>
+        <a href="user\userhomepage.php">User Profile</a>
+        <a href="index.php">Log Out</a>
+    </div>
+    
     <br>
     <table>
         <thead>

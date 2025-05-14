@@ -1,0 +1,60 @@
+*{
+    margin: auto;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+form input[type="text"], form input[type="submit"], 
+form input[type="checkbox"], form input[type="date"], 
+form input[type="number"], form input[type="password"], 
+form input[type="email"] {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 10px 25px 10px 25px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+a:hover {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    border: 1px black solid;
+    padding: 10px 25px 10px 25px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+th {
+    padding: 0px 15px 10px 15px;
+}
+
+td {
+    text-align: center;
+}
+
+.user-profile {
+    line-height: 25px;
+}
+
+.user-profile h3 {
+    text-align: center;
+}

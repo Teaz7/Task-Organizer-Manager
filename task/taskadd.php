@@ -51,14 +51,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-        Task Name: <input type="text" name="AddTaskName" required>
-        Task Description: <input type="text" name="AddTaskDescription" required>
-        Task Priority: <input type="checkbox" name="AddTaskPriority">
-        Task Date Start: <input type="date" name="AddTaskDateStart" required>
-        Task Date End: <input type="date" name="AddTaskDateEnd" required>
+        Task Name: <input type="text" name="AddTaskName" required> <br>
+        Task Description: <input type="text" name="AddTaskDescription" required> <br>
+        Task Priority: <input type="checkbox" name="AddTaskPriority"> <br>
+        Task Date Start: <input type="date" name="AddTaskDateStart" required> <br>
+        Task Date End: <input type="date" name="AddTaskDateEnd" required> <br>
         <input type="submit">
     </form> <br>
     <a href="taskhomepage.php">Go Back</a>

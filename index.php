@@ -33,12 +33,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-        Email: <input type="text" name="loginEmail">
-        Password: <input type="password" name="loginPassword">
+        Email: <input type="text" name="loginEmail" required> <br>
+        Password: <input type="password" name="loginPassword" required> <br>
         <input type="submit">
     </form>
 
