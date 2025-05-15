@@ -64,18 +64,20 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="input-form-body">
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-        First Name: <input type="text" name="signUpFName" required> <br>
-        Last Name: <input type="text" name="signUpLName" required> <br>
-        Age: <input type="number" name="signUpAge" required> <br>
-        Email: <input type="email" name="signUpEmail" required> <br>
-        Gender: <input type="text" name="signUpGender" required> <br>
-        Occupation: <input type="text" name="signUpOccupation" required> <br>
-        Establishment: <input type="text" name="signUpEstablishment" required> <br>
-        Password: <input type="password" name="signUpPassword" required> <br>
-        Confirm Password: <Input type="password" name="confirmPassword" required> <br>
-        <input type="submit">
+        <table>
+            <tr><td>First Name: </td><td><input type="text" name="signUpFName" required></td></tr>
+            <tr><td>Last Name: </td><td><input type="text" name="signUpLName" required></td></tr>
+            <tr><td>Age: </td><td><input type="number" name="signUpAge" required></td></tr>
+            <tr><td>Email: </td><td><input type="email" name="signUpEmail" required></td></tr>
+            <tr><td>Gender: </td><td><input type="text" name="signUpGender" required></td></tr>
+            <tr><td>Occupation: </td><td><input type="text" name="signUpOccupation" required></td></tr>
+            <tr><td>Establishment: </td><td><input type="text" name="signUpEstablishment" required></td></tr>
+            <tr><td>Password: </td><td><input type="password" name="signUpPassword" required></td></tr>
+            <tr><td>Confirm Password: </td><td><Input type="password" name="confirmPassword" required></td></tr>
+        </table>
+        <div class="form-submit"><input type="submit" value="Create Account"></div>
     </form>
 
     <a href="index.php">Go Back</a>

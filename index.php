@@ -35,11 +35,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="input-form-body">
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-        Email: <input type="text" name="loginEmail" required> <br>
-        Password: <input type="password" name="loginPassword" required> <br>
-        <input type="submit">
+        <table>
+            <tr><td>Email: </td><td><input type="text" name="loginEmail" required></td></tr>
+            <tr><td>Password: </td><td><input type="password" name="loginPassword" required></td></tr>
+        </table>
+        <div class="form-submit"><input type="submit" value="Login"></div>
     </form>
 
     <a href="signup.php">Sign Up</a>

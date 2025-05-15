@@ -1,6 +1,6 @@
 <?php 
     include '../init.php';
-    include 'function/fetchUserId.php';
+    include '../functions/fetchUserId.php';
 ?>
 
 <!DOCTYPE html>

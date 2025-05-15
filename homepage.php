@@ -1,6 +1,6 @@
 <?php
     include 'init.php';
-    include 'user/function/fetchUserId.php';
+    include 'functions/fetchUserId.php';
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
@@ -18,12 +18,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <a href="store.php">Store</a>
-        <a href="task\taskhomepage.php">Task Homepage</a>
-        <a href="calendar.php">Calendar</a>
-        <a href="user\userhomepage.php">User Profile</a>
-        <a href="index.php">Log Out</a>
+    <div class="heading">
+        <div>
+            <a href="store.php">Store</a>
+            <a href="calendar.php">Calendar</a>
+            <a href="user\userhomepage.php">User Profile</a>
+            <a href="index.php">Log Out</a>
+        </div>
     </div>
     
     <br>

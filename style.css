@@ -1,6 +1,17 @@
+* {
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    padding: 3px 30px 3px 30px !important;
+}
+
 table {
     border-collapse: collapse;
-    width: 100%; 
+    width: 90%;
 }
 
 th, td {
@@ -8,16 +19,27 @@ th, td {
     width: 14.28%;
     vertical-align: top;
     padding: 5px;
-    height: 100px;
 }
 
 th {
     background: #eee;
+    height: 50px;
+}
+
+td {
+    height: 100px;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px 10px 20px;
 }
 
 .calendar-nav {
     margin-bottom: 10px;
-    display: flex;
+    display: flexbox;
     align-items: center;
     gap: 10px;
 }
@@ -92,4 +114,48 @@ th {
 
 .add-task-btn {
     margin-top: 10px;
+}
+
+.input-form-body {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-form-body 
+form input[type="text"], form input[type="submit"], 
+form input[type="checkbox"], form input[type="date"], 
+form input[type="number"], form input[type="password"], 
+form input[type="email"] {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.input-form-body .form-submit {
+    text-align: center;
+}
+
+a, .input-form-body input[type="submit"] {
+    border-radius: 30px;
+    background-color: transparent;
+    padding: 3px 40px 3px 40px;
+    border: 0.5px black solid;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover, .input-form-body input[type="submit"]:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.input-form-body td {
+    height: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 0px black solid;
+    vertical-align: middle;
+    padding: 0px 5px 0px 0px;
 }
