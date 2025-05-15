@@ -149,31 +149,7 @@ foreach ($tasks as $task) {
 <head>
     <meta charset="UTF-8">
     <title>Calendar</title>
-    <style>
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; width: 14.28%; vertical-align: top; padding: 5px; height: 100px; }
-        th { background: #eee; }
-        .calendar-nav { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .calendar-nav select, .calendar-nav button { font-size: 1em; }
-        .today-cell { background: #ffe082 !important; border: 2px solid #ff9800 !important; }
-        .priority-cell { background: #ffcccc !important; }
-        .modal-bg {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center;
-        }
-        .modal {
-            background: #fff; padding: 20px; border-radius: 8px; min-width: 300px; max-width: 90vw;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        .modal-close { float: right; cursor: pointer; font-size: 1.2em; }
-        .task-desc-list { margin: 0; padding: 0 0 0 20px; }
-        .task-detail { margin-bottom: 15px; }
-        .task-label { font-weight: bold; }
-        .task-actions { margin-top: 5px; }
-        .edit-form input[type="text"], .edit-form input[type="date"] { width: 90%; margin-bottom: 5px; }
-        .add-form input[type="text"], .add-form input[type="date"] { width: 90%; margin-bottom: 5px; }
-        .add-task-btn { margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script>
         window.taskDetails = <?= json_encode($taskDetailsByDate) ?>;
         function goToMonth() {
