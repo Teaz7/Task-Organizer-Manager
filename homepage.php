@@ -19,6 +19,7 @@
 </head>
 <body>
     <div class="heading">
+        <h1>TOM: Task Organizer Manager</h1>
         <div>
             <a href="store.php">Store</a>
             <a href="calendar.php">Calendar</a>

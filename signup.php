@@ -64,23 +64,25 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="input-form-body">
-    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-        <table>
-            <tr><td>First Name: </td><td><input type="text" name="signUpFName" required></td></tr>
-            <tr><td>Last Name: </td><td><input type="text" name="signUpLName" required></td></tr>
-            <tr><td>Age: </td><td><input type="number" name="signUpAge" required></td></tr>
-            <tr><td>Email: </td><td><input type="email" name="signUpEmail" required></td></tr>
-            <tr><td>Gender: </td><td><input type="text" name="signUpGender" required></td></tr>
-            <tr><td>Occupation: </td><td><input type="text" name="signUpOccupation" required></td></tr>
-            <tr><td>Establishment: </td><td><input type="text" name="signUpEstablishment" required></td></tr>
-            <tr><td>Password: </td><td><input type="password" name="signUpPassword" required></td></tr>
-            <tr><td>Confirm Password: </td><td><Input type="password" name="confirmPassword" required></td></tr>
-        </table>
-        <div class="form-submit"><input type="submit" value="Create Account"></div>
-    </form>
+<body>
+    <div class="input-form">
+        <h2>TOM: Task Organizer Manager</h2>
+        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
+            <table>
+                <tr><td>First Name: </td><td><input type="text" name="signUpFName" required></td></tr>
+                <tr><td>Last Name: </td><td><input type="text" name="signUpLName" required></td></tr>
+                <tr><td>User's Age: </td><td><input type="number" name="signUpAge" required></td></tr>
+                <tr><td>Email Address: </td><td><input type="email" name="signUpEmail" required></td></tr>
+                <tr><td>Gender: </td><td><input type="text" name="signUpGender" required></td></tr>
+                <tr><td>Occupation: </td><td><input type="text" name="signUpOccupation" required></td></tr>
+                <tr><td>Establishment: </td><td><input type="text" name="signUpEstablishment" required></td></tr>
+                <tr><td>Password: </td><td><input type="password" name="signUpPassword" required></td></tr>
+                <tr><td>Confirm Password: </td><td><Input type="password" name="confirmPassword" required></td></tr>
+            </table>
+            <div class="form-submit"><input type="submit" value="Create Account"></div>
+        </form>
 
-    <a href="index.php">Go Back</a>
-
+        <a href="index.php">Go Back</a>    
+    </div>
 </body>
 </html>

@@ -12,19 +12,31 @@
     <link rel="stylesheet" href="../style.css"> 
 </head>
 <body>
-    <div class="user-profile">
-        <h3>USER PROFILE</h3>
-        ID: <?= $result["USER_Id"] ?> <br>
-        Username: <?= $result["USER_FName"]." ".$result["USER_LName"] ?> <br>
-        Age: <?= $result["USER_Age"] ?> <br>
-        Email Address: <?= $result["USER_Email"] ?> <br>
-        Occupation: <?= $result["USER_Occupation"] ?> <br>
-        Establishment: <?= $result["USER_Establishment"] ?> <br>
-        Current Points: <?= $result["USER_Points"]." Points" ?> <br><br>
+    <div class="heading">
+        <h1>TOM: Task Organizer Manager</h1><br><br>
     </div>
-    <a href="useredit.php">Edit Account Details</a>
-    <a href="userremove.php">Remove Account</a>
-    <a href="../homepage.php">Go Back</a>
-    <a href="../index.php">Log Out</a>
+    <div>
+       <div class="user-profile">
+            <h2>USER PROFILE</h2><br>
+            <table>
+                <tr><td>Account ID: </td><td><?= $result["USER_Id"] ?></td></tr>
+                <tr><td>Username: </td><td><?= $result["USER_FName"]." ".$result["USER_LName"] ?></td></tr>
+                <tr><td>Age: </td><td><?= $result["USER_Age"] ?></td></tr>
+                <tr><td>Email Address: </td><td><?= $result["USER_Email"] ?></td></tr>
+                <tr><td>Occupation: </td><td><?= $result["USER_Occupation"] ?></td></tr>
+                <tr><td>Establishment: </td><td><?= $result["USER_Establishment"] ?></td></tr>
+                <tr><td>Current Points: </td><td><?= $result["USER_Points"]." Points" ?></td></tr>
+            </table>
+        </div> 
+    </div>
+
+    <div class="button-group">
+        <a href="useredit.php">Edit Account Details</a>
+        <a href="userremove.php">Remove Account</a><br>
+        <a href="../homepage.php">Go Back</a>
+        <a href="../index.php">Log Out</a>    
+    </div>
+    
+    
 </body>
 </html>

@@ -9,9 +9,10 @@ body {
 
 a {
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 18px;
     color: black;
     padding: 5px 20px 5px 20px !important;
+    font-weight: bold;
 }
 
 table {
@@ -53,8 +54,10 @@ tbody tr td:hover {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    padding: 20px 30px 10px 30px;
+    padding: 20px 30px 0px 30px;
     background-color: rgb(232, 143, 88);
+    height: 100px;
+    flex-direction: column;
 }
 
 .heading h3, .heading h1 {
@@ -191,15 +194,18 @@ tbody tr td:hover {
     border: 1px rgb(232, 143, 88) solid;
 }
 
-.input-form-body {
+.input-form {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: white;
+    width: 350px;
+    padding: 20px;
 }
 
-.input-form-body 
+.input-form
 form input[type="text"], form input[type="submit"], 
 form input[type="checkbox"], form input[type="date"], 
 form input[type="number"], form input[type="password"], 
@@ -208,28 +214,66 @@ form input[type="email"] {
     margin-bottom: 10px;
 }
 
-.input-form-body .form-submit {
+.input-form .form-submit {
     text-align: center;
 }
 
-a, .input-form-body input[type="submit"] {
+a, .input-form input[type="submit"] {
     background-color: transparent;
     padding: 3px 40px 3px 40px;
     border: 0.5px black solid;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
     
-a:hover, .input-form-body input[type="submit"]:hover {
+a:hover, .input-form input[type="submit"]:hover {
     background-color: rgb(66, 25, 0);
     color: rgb(232, 143, 88);
     cursor: pointer;
 }
 
-.input-form-body td {
+.input-form td {
     height: 10px;
+    width: 200px;
     align-items: center;
     justify-content: center;
     border: 0px black solid;
     vertical-align: middle;
     padding: 0px 5px 0px 0px;
+    text-align: right;
+}
+
+.input-form td:hover {
+    background-color: white;
+    color: black;
+}
+
+.input-form form {
+    padding: 10px;
+}
+
+.user-profile {
+    line-height: 25px;
+    background-color: white;
+    width: 400px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.user-profile td {
+    height: 10px;
+    border: 0px transparent solid;
+}
+
+.user-profile h2 {
+    text-align: center;
+}
+
+.button-group {
+    text-align: center;
+}
+
+.button-group a {
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: -10px;
 }
