@@ -98,17 +98,18 @@ foreach ($tasks as $task) {
             var modalBg = document.getElementById('modal-bg');
             var html = '';
             if (details && details.length > 0) {
+                html += '<div class="task-heading">TASKS</div>';
                 for (var i = 0; i < details.length; i++) {
                     var t = details[i];
                     html += '<div class="task-detail" id="task-detail-'+t.id+'">';
                     html += '<div><span class="task-label">Task:</span> ' + escapeHtml(t.name) + '</div>';
                     html += '<div><span class="task-label">Description:</span> ' + escapeHtml(t.desc) + '</div>';
                     html += '<div><span class="task-label">Start Date:</span> ' + escapeHtml(t.start) + '</div>';
-                    html += '<div><span class="task-label">Finish Date:</span> ' + escapeHtml(t.finish) + '</div>';
+                    html += '<div><span class="task-label finish-date">Finish Date:</span> ' + escapeHtml(t.finish) + '</div>';
                     html += '<div><span class="task-label">Priority:</span> ' + (t.priority === "on" ? "Yes" : "No") + '</div>';
                     html += '<div class="task-actions">';
                     html += '<button onclick="showEditForm('+t.id+',\''+escapeJs(t.name)+'\',\''+escapeJs(t.desc)+'\',\''+t.start+'\',\''+t.finish+'\',\''+t.priority+'\')">Edit</button> ';
-                    html += '<form method="POST" style="display:inline" onsubmit="return confirm(\'Delete this task?\')">';
+                    html += '<form method="POST" style="display:inline" onsubmit="return confirm(\'Are you sure you want to delete ' + escapeHtml(t.name) + '?\')">';
                     html += '<input type="hidden" name="delete_task_id" value="'+t.id+'">';
                     html += '<button type="submit">Delete</button>';
                     html += '</form>';
@@ -179,7 +180,8 @@ foreach ($tasks as $task) {
 </head>
 <body>
     <div class="heading"><div>
-        <h2><?= date('F Y', strtotime("$year-$month-01")) ?> Task Calendar</h2>
+        <h1>TOM: Task Organizer Manager</h1>
+        <h3><?= strtoupper(date('F Y', strtotime("$year-$month-01"))) ?> TASK CALENDAR</h>
 
         <div class="calendar-nav">
             <button onclick="window.location.href='?month=<?= $prevMonth ?>&year=<?= $prevYear ?>'">&laquo; Prev</button>
@@ -203,15 +205,16 @@ foreach ($tasks as $task) {
             </select>
             <button onclick="window.location.href='?month=<?= $nextMonth ?>&year=<?= $nextYear ?>'">Next &raquo;</button>
             <button onclick="goToToday()">Today</button>
+
+            <a href="homepage.php">Return to Home</a>
         </div></div>
 
-        <a href="homepage.php">Return to Home</a>
     </div>
 
     <table>
         <thead>
             <tr>
-                <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+                <th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th><th>SUNDAY</th>
             </tr>
         </thead>
         <tbody>

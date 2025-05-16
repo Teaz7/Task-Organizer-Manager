@@ -1,40 +1,65 @@
 * {
     margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+}
+
+body {
+    background-color: rgb(255, 226, 212);
 }
 
 a {
     text-decoration: none;
-    font-size: 14px;
+    font-size: 0.9em;
     color: black;
-    padding: 3px 30px 3px 30px !important;
+    padding: 5px 20px 5px 20px !important;
 }
 
 table {
     border-collapse: collapse;
     width: 90%;
+    background-color: white;
 }
 
-th, td {
-    border: 1px solid #ccc;
+td {
+    border: 1px solid black;
     width: 14.28%;
     vertical-align: top;
     padding: 5px;
 }
 
 th {
-    background: #eee;
-    height: 50px;
+    border: 0px transparent solid;
+    background-color: black;
+    height: 40px;
+    color: rgb(232, 143, 88);
+    vertical-align: middle;
 }
 
 td {
     height: 100px;
 }
 
+tbody tr td {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+tbody tr td:hover {
+    background-color: rgb(232, 143, 88);
+    color: white;
+}
+
 .heading {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 20px 10px 20px;
+    margin-bottom: 20px;
+    padding: 20px 30px 10px 30px;
+    background-color: rgb(232, 143, 88);
+}
+
+.heading h3, .heading h1 {
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 .calendar-nav {
@@ -46,15 +71,34 @@ td {
 
 .calendar-nav select, .calendar-nav button {
     font-size: 1em;
+    background-color: black;
+    border: black 0px solid;
+    color: rgb(232, 143, 88);
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.calendar-nav select:hover, .calendar-nav button:hover {
+    background-color: rgb(66, 25, 0);
+    color: white;
 }
 
 .today-cell {
-    background: #ffe082 !important;
-    border: 2px solid #ff9800 !important;
+    background: black !important;
+    border: 2px solid rgb(232, 143, 88) !important;
+    color: rgb(232, 143, 88);
 }
 
 .priority-cell {
-    background: #ffcccc !important;
+    background: rgb(232, 143, 88) !important;
+    color: white !important;
+}
+
+.today-cell:hover, .priority-cell:hover {
+    background-color: rgb(66, 25, 0) !important;
+    color: white !important;
+    border: 2px solid rgb(232, 143, 88) !important;
 }
 
 .modal-bg {
@@ -71,7 +115,8 @@ td {
 }
 
 .modal {
-    background: #fff;
+    background: black;
+    color: white;
     padding: 20px;
     border-radius: 8px;
     min-width: 300px;
@@ -94,8 +139,27 @@ td {
     margin-bottom: 15px;
 }
 
+.task-detail button {
+    background-color: transparent;
+    border: 1px white solid;
+    color: white;
+    padding: 5px 15px 5px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.task-heading {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .task-label {
     font-weight: bold;
+}
+
+.finish-date {
+    color: rgb(232, 143, 88);
 }
 
 .task-actions {
@@ -113,7 +177,18 @@ td {
 }
 
 .add-task-btn {
-    margin-top: 10px;
+    float: right;
+    background-color: transparent;
+    border: 1px white solid;
+    color: white;
+    padding: 5px 15px 5px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.add-task-btn:hover, .task-detail button:hover {
+    color: rgb(232, 143, 88);
+    border: 1px rgb(232, 143, 88) solid;
 }
 
 .input-form-body {
@@ -138,16 +213,15 @@ form input[type="email"] {
 }
 
 a, .input-form-body input[type="submit"] {
-    border-radius: 30px;
     background-color: transparent;
     padding: 3px 40px 3px 40px;
     border: 0.5px black solid;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+    
 a:hover, .input-form-body input[type="submit"]:hover {
-    background-color: black;
-    color: white;
+    background-color: rgb(66, 25, 0);
+    color: rgb(232, 143, 88);
     cursor: pointer;
 }
 
