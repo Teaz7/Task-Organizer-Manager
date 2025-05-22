@@ -1,0 +1,28 @@
+<?php
+include 'init.php';
+
+if (!isset($_GET['id'])) {
+    http_response_code(400);
+    exit('No ID provided');
+}
+
+$id = intval($_GET['id']);
+
+$stmt = $conn->prepare("SELECT PROD_Photo FROM product WHERE PROD_Id = ?");
+$stmt->execute([$id]);
+$imageData = $stmt->fetchColumn();
+
+if ($imageData) {
+    // Detect MIME type
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mimeType = $finfo->buffer($imageData);
+
+    header("Content-Type: $mimeType");
+    header('Cache-Control: public, max-age=86400');
+    echo $imageData;
+    exit;
+} else {
+    http_response_code(404);
+    exit('Image not found');
+}
+?>

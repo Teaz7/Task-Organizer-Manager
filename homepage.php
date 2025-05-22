@@ -1,6 +1,7 @@
 <?php
     include 'init.php';
     include 'functions/fetchUserId.php';
+    $selectedId = $_SESSION['selected_product_id'] ?? null;
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
@@ -17,6 +18,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="heading">
         <h1>TOM: Task Organizer Manager</h1>
@@ -57,5 +59,19 @@
             <?php } ?>
         </tbody>
     </table>
+    <script src="virtualPet.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        let selectedImage = localStorage.getItem('selectedPetImage');
+        if (!selectedImage && <?= json_encode($selectedId) ?>) {
+            selectedImage = "image.php?id=" + <?= json_encode($selectedId) ?>;
+            localStorage.setItem('selectedPetImage', selectedImage); // sync
+        }
+        if (selectedImage) {
+            createPet({ image: selectedImage });
+        }
+    });
+</script>
+
 </body>
 </html>
