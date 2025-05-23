@@ -1,0 +1,64 @@
+INSERT INTO user
+(USER_FName, USER_LName, USER_Password, USER_Age, USER_Email, USER_Gender, USER_Occupation, USER_Establishment)
+VALUES
+("Sean", "Patrick", "test", 20, "sean@gmail.com", "M", "Student", "WVSU");
+
+INSERT INTO store
+(STORE_NumOfProducts, USER_Id)
+VALUES
+(0, 1);
+
+INSERT INTO calendar
+(CAL_NumOfTask, USER_Id)
+VALUES
+(0, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Web Stuff", "paisdfpiasd", NULL, "Unfinished", '2025-5-10', '2025-5-29', 0, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Coding Stuff", "aosndoadsn", 1, "Unfinished", '2025-5-9', '2025-6-1', 0, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Design Stuff", "asdfjkhasdlf", 1, "Unfinished", '2025-05-11', '2025-05-20', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Backend API", "asdkjhaklsdjh", NULL, "Unfinished", '2025-05-12', '2025-05-21', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Debug Stuff", "qweuirzmxncv", 1, "Unfinished", '2025-05-13', '2025-05-22', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Write Stuff", "zxcmvasdflkj", NULL, "Unfinished", '2025-05-14', '2025-05-23', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Read Stuff", "poiuytrewqas", 1, "Unfinished", '2025-05-15', '2025-05-24', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Check Stuff", "lkjhgfdsaqwe", NULL, "Unfinished", '2025-05-16', '2025-05-25', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Review Code", "asdfghjklzxc", 1, "Unfinished", '2025-05-17', '2025-05-26', 1, 1, 1);
+
+INSERT INTO task 
+(TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
+VALUES
+("Finalize Project", "zmxncbvasdfg", NULL, "Unfinished", '2025-05-18', '2025-05-27', 1, 1, 1);

@@ -1,6 +1,7 @@
 <?php
     include 'init.php';
     include 'functions/fetchUserId.php';
+    include 'functions/table/getTable.php';
     $selectedId = $_SESSION['selected_product_id'] ?? null;
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
@@ -29,38 +30,56 @@
             <a href="index.php">Log Out</a>
         </div>
     </div>
-    
     <br>
-    <table>
-        <thead>
-            <tr>
-                <th>Task ID</th>
-                <th>Task Name</th>
-                <th>Task Description</th>
-                <th>Task Priority Class</th>
-                <th>Task Status</th>
-                <th>Task Date Start</th>
-                <th>Task Date Finish</th>
-                <th>Task Progress</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($results as $res) { ?>
-                <tr>
-                    <td> <?= $res['TASK_Id'] ?> </td>
-                    <td> <?= $res['TASK_Name'] ?> </td>
-                    <td> <?= $res['TASK_Description'] ?> </td>
-                    <td> <?= $res['TASK_PriorityClass'] ?> </td>
-                    <td> <?= $res['TASK_Status'] ?> </td>
-                    <td> <?= $res['TASK_DateStart'] ?> </td>
-                    <td> <?= $res['TASK_DateFinish'] ?> </td>
-                    <td> <?= $res['TASK_Progress'] ?> </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-    <script src="virtualPet.js"></script>
+
+    <div>
+        Search By 
+        <select id="searchType" name="searchType">
+            <option value="searchID">Task ID</option>
+            <option value="searchDescription">Task Desription</option>
+            <option value="searchName">Task Name</option>
+            <option value="searchDateStart">Task Date Start</option>
+            <option value="searchDateEnd">Task Task Finish</option>
+        </select>: 
+        <input type="text" id="searchInput" onkeyup="search(this.value)">
+        Sort By:
+        <select name="tableSort">
+            <option value="sortID">Task ID</option>
+            <option value="sortName">Task Name</option>
+            <option value="sortDateStart">Task Date Start</option>
+            <option value="sortDateEnd">Task Task Finish</option>
+            <option value="sortProgress">Task Progress</option>
+        </select>
+    </div>
+    <br>
+
+    <div id="searchResults">
+        <?= $defaultTable ?>
+    </div>
+    
+    
+<script src="virtualPet.js"></script>
 <script>
+    function search(input) {
+        const searchType = document.querySelector('select[name="searchType"]').value;
+        if (input.length === 0) {
+            fetch('functions/table/defaultTable.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("searchResults").innerHTML = data;
+            });
+            return;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState==4 && this.status==200) {
+                document.getElementById("searchResults").innerHTML = this.responseText;
+            }
+        }
+        xhr.open("GET", `functions/search.php?keyword=${encodeURIComponent(input)}&type=${encodeURIComponent(searchType)}`, true);
+        xhr.send();
+    };
+
     window.addEventListener('DOMContentLoaded', () => {
         let selectedImage = localStorage.getItem('selectedPetImage');
         if (!selectedImage && <?= json_encode($selectedId) ?>) {
