@@ -39,7 +39,7 @@ if (isset($_POST['submit']) && isset($_FILES['photos'])) {
 ?>
 
 <!-- Upload form -->
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<form action="uploadpictrial.php" method="post" enctype="multipart/form-data">
     <input type="file" name="photos[]" multiple required>
     <input type="submit" name="submit" value="Upload Products">
 </form>
