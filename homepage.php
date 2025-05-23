@@ -43,7 +43,7 @@
         </select>: 
         <input type="text" id="searchInput" onkeyup="search(this.value)">
         Sort By:
-        <select name="tableSort">
+        <select id="tableSort" name="tableSort">
             <option value="sortID">Task ID</option>
             <option value="sortName">Task Name</option>
             <option value="sortDateStart">Task Date Start</option>
@@ -79,6 +79,18 @@
         xhr.open("GET", `functions/search.php?keyword=${encodeURIComponent(input)}&type=${encodeURIComponent(searchType)}`, true);
         xhr.send();
     };
+
+    function loadSortedTable() {
+        const sortBy = document.querySelector('select[name="tableSort"]').value;
+
+        fetch(`functions/table/sortTable.php?sort=${encodeURIComponent(sortBy)}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("searchResults").innerHTML = data;
+            });
+    }
+
+    document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
 
     window.addEventListener('DOMContentLoaded', () => {
         let selectedImage = localStorage.getItem('selectedPetImage');
