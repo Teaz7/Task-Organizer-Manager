@@ -2,7 +2,7 @@
     include(__DIR__ . '/../../init.php');
     include(__DIR__ . '/../fetchUserId.php');
     
-    $selectedId = $_SESSION['selected_product_id'] ?? null;
+    $selectedId = $_SESSION['USER_selectedID'] ?? null;
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
