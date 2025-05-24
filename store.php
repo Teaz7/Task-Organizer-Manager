@@ -21,12 +21,12 @@ if ($store_id > 0) {
     }
 }
 
-if (!isset($_SESSION['USER_selectedID'])) {
-    $stmt = $conn->prepare("SELECT USER_selectedID FROM user WHERE USER_Id = :user_id");
+if (!isset($_SESSION['USER_selectedPetID'])) {
+    $stmt = $conn->prepare("SELECT USER_selectedPetID FROM user WHERE USER_Id = :user_id");
     $stmt->execute(['user_id' => $user_id]);
-    $_SESSION['USER_selectedID'] = $stmt->fetchColumn();
+    $_SESSION['USER_selectedPetID'] = $stmt->fetchColumn();
 }
-$selectedId = $_SESSION['USER_selectedID'];
+$selectedId = $_SESSION['USER_selectedPetID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
