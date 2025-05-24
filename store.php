@@ -1,37 +1,32 @@
 <?php
-include 'init.php'; // Ensure this calls session_start() at its beginning
+include 'init.php'; // must start session
 include 'functions/fetchUserId.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-if (!isset($conn) || !$conn) {
-    die('Database connection not established.');
-}
 
 $store_id = isset($_GET['STORE_Id']) ? intval($_GET['STORE_Id']) : 1;
 $user_id = $id;
 
 $products = [];
-$ownedProducts = []; // Stores array of PROD_Id that the user owns
+$ownedProducts = [];
 
 if ($store_id > 0) {
-    // Fetch products for the store
     $stmt = $conn->prepare("SELECT PROD_Id, PROD_Name, PROD_Amount FROM product WHERE STORE_Id = :store_id");
     if ($stmt->execute([':store_id' => $store_id])) {
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        $errorInfo = $stmt->errorInfo();
-        echo "SQL Error fetching products: " . htmlspecialchars($errorInfo[2]);
     }
 
-    // Fetch IDs of products owned by the user
     if ($user_id) {
         $stmt = $conn->prepare("SELECT prod_id FROM purchases WHERE user_id = :user_id");
         $stmt->execute([':user_id' => $user_id]);
-        $ownedProducts = $stmt->fetchAll(PDO::FETCH_COLUMN); // Fetches just the prod_id column into a simple array
+        $ownedProducts = $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }
+
+if (!isset($_SESSION['USER_selectedPetID'])) {
+    $stmt = $conn->prepare("SELECT USER_selectedPetID FROM user WHERE USER_Id = :user_id");
+    $stmt->execute(['user_id' => $user_id]);
+    $_SESSION['USER_selectedPetID'] = $stmt->fetchColumn();
+}
+$selectedId = $_SESSION['USER_selectedPetID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,6 +141,7 @@ if ($store_id > 0) {
 <div class="heading">
     <h1>TOM: Task Organizer Manager</h1>
     <div>
+        <a href=" "><?= $result["USER_Points"]." Points|" ?></a>
         <a href="homepage.php">Home</a>
         <a href="calendar.php">Calendar</a>
         <a href="user/userhomepage.php">User Profile</a>
@@ -153,31 +149,35 @@ if ($store_id > 0) {
     </div>
 </div>
 
-<button onclick="resetPet()">Reset Pet</button> <?php if (empty($products)): ?>
+<button onclick="resetPet()">Reset Pet</button>
+
+<?php if (empty($products)): ?>
     <p style="text-align:center; margin:30px; font-size: 1.2em;">No products found for this store or store not selected.</p>
 <?php else: ?>
     <div class="product-list">
         <?php foreach ($products as $product): 
             $prodId = htmlspecialchars($product['PROD_Id']);
-            // Check if the current product's ID is in the array of owned product IDs
             $isOwned = in_array($product['PROD_Id'], $ownedProducts);
         ?>
             <div class="product-item">
-                <div> <div class="product-name"><?= htmlspecialchars($product['PROD_Name']) ?></div>
+                <div>
+                    <div class="product-name"><?= htmlspecialchars($product['PROD_Name']) ?></div>
                     <div class="product-amount">Points: <?= htmlspecialchars($product['PROD_Amount']) ?></div>
                 </div>
                 <img
                     class="product-img"
                     src="image.php?id=<?= urlencode($prodId) ?>"
-                    alt="<?= htmlspecialchars($product['PROD_Name']) ?> Image" <?php if ($isOwned): ?>
+                    alt="<?= htmlspecialchars($product['PROD_Name']) ?> Image"
+                    <?php if ($isOwned): ?>
                         onclick="selectPet(<?= $prodId ?>)"
                         style="cursor:pointer;" title="Select this pet"
                     <?php else: ?>
                         title="Buy to activate and select as pet"
-                        style="cursor:default;" <?php endif; ?>
+                        style="cursor:default;"
+                    <?php endif; ?>
                 />
                 <?php if ($isOwned): ?>
-                    <button disabled title="You already own this pet">Owned</button>
+                    <button disabled>Owned</button>
                 <?php else: ?>
                     <button onclick="buyProduct(<?= $prodId ?>)">Buy</button>
                 <?php endif; ?>
@@ -189,9 +189,6 @@ if ($store_id > 0) {
 <script src="virtualPet.js"></script>
 <script>
 function selectPet(prodId) {
-    const imgUrl = `image.php?id=${prodId}`;
-    localStorage.setItem('selectedPetImage', imgUrl);
-
     fetch('setSelectedPet.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -200,12 +197,11 @@ function selectPet(prodId) {
     .then(res => res.json())
     .then(data => {
         if (data.status === 'success') {
+            const imgUrl = `image.php?id=${prodId}`;
             if (typeof createPet === 'function') {
-                createPet({ image: imgUrl }); // Create/update pet on current page
-                alert('Pet selected!'); // Optional: feedback to user
-            } else {
-                console.warn('createPet function not found, but pet selection was saved.');
+                createPet({ image: imgUrl });
             }
+            alert('Pet selected!');
         } else {
             alert('Failed to select pet: ' + data.message);
         }
@@ -217,20 +213,23 @@ function selectPet(prodId) {
 }
 
 function resetPet() {
-    localStorage.removeItem('selectedPetImage');
-    // Optionally, tell the server to clear the selected pet from the session
-    // fetch('clearSelectedPet.php', { method: 'POST' }); // See note below
-
-    // Remove visual elements of the pet from the page
-    const petElement = document.getElementById('pet'); // Assuming your pet has id 'pet'
-    if (petElement) petElement.remove();
-    const speechElement = document.getElementById('speech'); // Assuming speech bubble has id 'speech'
-    if (speechElement) speechElement.remove();
-    
-    alert('Pet has been reset.'); // Feedback
+    fetch('clearSelectedPet.php', {
+        method: 'POST'
+    })
+    .then(() => {
+        const pet = document.getElementById('pet');
+        if (pet) pet.remove();
+        const speech = document.getElementById('speech');
+        if (speech) speech.remove();
+        alert('Pet has been reset.');
+    });
 }
 
 function buyProduct(prodId) {
+    // Disable all buttons and images temporarily
+    document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+    document.querySelectorAll('.product-img').forEach(img => img.style.pointerEvents = 'none');
+
     fetch('buyProduct.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -238,10 +237,8 @@ function buyProduct(prodId) {
     })
     .then(res => res.json())
     .then(data => {
-        alert(data.message); // Show message from server (success or error)
-        if (data.status === 'success') {
-            location.reload(); // Reload to refresh ownership status and UI
-        }
+        alert(data.message);
+        if (data.status === 'success') location.reload();
     })
     .catch(error => {
         console.error('Error buying product:', error);
@@ -250,11 +247,9 @@ function buyProduct(prodId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const selectedImage = localStorage.getItem('selectedPetImage');
-    if (selectedImage && typeof createPet === 'function') {
-        createPet({ image: selectedImage });
-    } else if (selectedImage) {
-        console.warn('Found selectedPetImage in localStorage, but createPet function is not available.');
+    const selectedId = <?= json_encode($selectedId) ?>;
+    if (selectedId && typeof createPet === 'function') {
+        createPet({ image: `image.php?id=${selectedId}` });
     }
 });
 </script>

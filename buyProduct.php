@@ -59,10 +59,14 @@ try {
         exit;
     }
 
-    if ($user['USER_Points'] < $product_cost) {
-        echo json_encode(['status' => 'error', 'message' => 'Insufficient points to purchase this product.']);
-        exit;
-    }
+ $product_cost = intval($product['PROD_Amount']);
+$user_points = intval($user['USER_Points']);
+
+if ($user_points < $product_cost) {
+    echo json_encode(['status' => 'error', 'message' => 'Insufficient points to purchase this product.']);
+    exit;
+}
+
 
     // Proceed with transaction
     $conn->beginTransaction();
