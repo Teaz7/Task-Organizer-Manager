@@ -2,7 +2,11 @@
     include 'init.php';
     include 'functions/fetchUserId.php';
     include 'functions/table/getTable.php';
+<<<<<<< HEAD
     $selectedId = $_SESSION['USER_selectedPetID'] ?? null;
+=======
+    $selectedId = $_SESSION['USER_selectedID'] ?? null;
+>>>>>>> aa209fa74829ba286e0e56fe47a4d0cf701f04ed
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
@@ -27,7 +31,7 @@
             <a href="store.php">Store</a>
             <a href="calendar.php">Calendar</a>
             <a href="user\userhomepage.php">User Profile</a>
-            <a href="index.php">Log Out</a>
+            <a href="functions\logout.php">Log Out</a>
         </div>
     </div>
     <br>
