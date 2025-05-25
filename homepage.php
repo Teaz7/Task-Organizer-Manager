@@ -2,7 +2,7 @@
     include 'init.php';
     include 'functions/fetchUserId.php';
     include 'functions/table/getTable.php';
-    $selectedId = $_SESSION['selected_product_id'] ?? null;
+    $selectedId = $_SESSION['USER_selectedPetID'] ?? null;
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
@@ -27,7 +27,8 @@
             <a href="store.php">Store</a>
             <a href="calendar.php">Calendar</a>
             <a href="user\userhomepage.php">User Profile</a>
-            <a href="index.php">Log Out</a>
+            <a href="index.php">Switch Account</a>
+            <a href="functions\logout.php">Log Out</a>
         </div>
     </div>
     <br>
@@ -57,7 +58,7 @@
         <?= $defaultTable ?>
     </div>
     
-    
+ 
 <script src="virtualPet.js"></script>
 <script>
     function search(input) {
@@ -93,13 +94,10 @@
     document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
 
     window.addEventListener('DOMContentLoaded', () => {
-        let selectedImage = localStorage.getItem('selectedPetImage');
-        if (!selectedImage && <?= json_encode($selectedId) ?>) {
-            selectedImage = "image.php?id=" + <?= json_encode($selectedId) ?>;
-            localStorage.setItem('selectedPetImage', selectedImage); // sync
-        }
-        if (selectedImage) {
-            createPet({ image: selectedImage });
+        const selectedId = <?= json_encode($selectedId) ?>;
+        if (selectedId && typeof createPet === 'function') {
+            const imgUrl = `image.php?id=${selectedId}`;
+            createPet({ image: imgUrl });
         }
     });
 </script>

@@ -2,29 +2,11 @@
     include 'init.php';
     $_SESSION["currentUserEmail"] = "";
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_POST["loginEmail"];
-        $password = $_POST["loginPassword"];
-
-        try {
-            $stmt = $conn->prepare(
-                "SELECT * FROM user WHERE USER_Email = :email"
-            );
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (($user['USER_Email'] == $email) && ($user['USER_Password'] === $password)) {
-                $_SESSION["currentUserEmail"] = $email;
-                header('Location: homepage.php');
-            } else {
-                echo "Invalid Username or Password";
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e;
-        }
-    }
+    $stmt = $conn -> prepare(
+        "SELECT * FROM user"
+    );
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -33,20 +15,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="input-form">
-        <h2>TOM: Task Organizer Manager</h2>
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-            <table>
-                <tr><td>Email: </td><td><input type="text" name="loginEmail" required></td></tr>
-                <tr><td>Password: </td><td><input type="password" name="loginPassword" required></td></tr>
-            </table>
-            <div class="form-submit"><input type="submit" value="Login"></div>
-        </form>
-
-        <a href="signup.php">Sign Up</a>
-    </div>
+    <?php
+        $loginStatus = "";
+        foreach($result as $res) { 
+            if ($res['USER_LoginStatus'] == 1) {
+                $loginStatus = "Logged In";
+            } else {
+                $loginStatus = "Logged Out";
+            }
+    ?>
+        <a href="functions/checkLogin.php?email=<?= $res['USER_Email'] ?>">
+            <div>
+                <div>
+                    <?= $res['USER_FName']." ".$res['USER_LName'] ?> <br>
+                    <?= $res['USER_Email'] ?> <br>    
+                </div>
+                <div>
+                    <?= $loginStatus ?>    
+                </div>
+            </div> <br>
+        </a>
+        
+    <?php } ?>
 </body>
 </html>
