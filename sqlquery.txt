@@ -10,7 +10,8 @@ CREATE TABLE USER (
     USER_Gender VARCHAR(1),
     USER_Occupation VARCHAR(100),
     USER_Establishment TEXT,
-    USER_Points INT DEFAULT 0
+    USER_Points INT DEFAULT 0,
+    USER_LoginStatus INT DEFAULT 0
 );
 
 CREATE TABLE STORE (
@@ -66,7 +67,7 @@ CREATE TABLE REMINDER (
 
 
 CREATE TABLE REWARD (
-    REWARD_Id INT PRIMARY KEY,
+    REWARD_Id INT AUTO_INCREMENT PRIMARY KEY,
     REWARD_Points INT NOT NULL,
     TASK_Id INT,
     USER_Id INT,
@@ -83,4 +84,9 @@ CREATE TABLE purchases (
     FOREIGN KEY (user_id) REFERENCES user(USER_Id),
     FOREIGN KEY (prod_id) REFERENCES product(PROD_Id)
 );
+<<<<<<< HEAD
 ALTER TABLE users ADD COLUMN USER_selectedPetID INT NULL;
+=======
+
+ALTER TABLE user ADD COLUMN USER_selectedPetID INT NULL;
+>>>>>>> 93cdf7876aab44a26a49a559fb3fa8f7b9f5de3d
