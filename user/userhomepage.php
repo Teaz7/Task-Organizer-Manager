@@ -26,6 +26,7 @@
                 <tr><td>Occupation: </td><td><?= $result["USER_Occupation"] ?></td></tr>
                 <tr><td>Establishment: </td><td><?= $result["USER_Establishment"] ?></td></tr>
                 <tr><td>Current Points: </td><td><?= $result["USER_Points"]." Points" ?></td></tr>
+                <tr><td>Leaderboard: </td><td><a href="leaderboard.php">View Leaderboard</a></td></tr>
             </table>
         </div> 
     </div>
