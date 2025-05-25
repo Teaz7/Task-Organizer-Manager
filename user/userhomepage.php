@@ -34,7 +34,8 @@
         <a href="useredit.php">Edit Account Details</a>
         <a href="userremove.php">Remove Account</a><br>
         <a href="../homepage.php">Go Back</a>
-        <a href="../index.php">Log Out</a>    
+        <a href="../index.php">Switch Account</a>
+        <a href="../functions/logout.php">Log Out</a>
     </div>
     
     
