@@ -27,6 +27,7 @@
             <a href="store.php">Store</a>
             <a href="calendar.php">Calendar</a>
             <a href="user\userhomepage.php">User Profile</a>
+            <a href="index.php">Switch Account</a>
             <a href="functions\logout.php">Log Out</a>
         </div>
     </div>
