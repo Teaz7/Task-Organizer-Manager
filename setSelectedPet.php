@@ -51,18 +51,10 @@ if (!$owned) {
 }
 
 // ✅ Save the selected pet to the database
-<<<<<<< HEAD
 $stmt = $conn->prepare("UPDATE user SET USER_selectedPetID = :prod_id WHERE USER_Id = :user_id");
 $stmt->execute([':prod_id' => $prodId, ':user_id' => $userId]);
 
 // ✅ Also store in session
 $_SESSION['USER_selectedPetID'] = $prodId;
-=======
-$stmt = $conn->prepare("UPDATE user SET USER_selectedID = :prod_id WHERE USER_Id = :user_id");
-$stmt->execute([':prod_id' => $prodId, ':user_id' => $userId]);
-
-// ✅ Also store in session
-$_SESSION['USER_selectedID'] = $prodId;
->>>>>>> aa209fa74829ba286e0e56fe47a4d0cf701f04ed
 
 echo json_encode(['status' => 'success', 'message' => 'Pet selected successfully.']);
