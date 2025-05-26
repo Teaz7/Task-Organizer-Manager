@@ -33,11 +33,16 @@
 
     <div class="button-group">
         <a href="useredit.php">Edit Account Details</a>
-        <a href="userremove.php">Remove Account</a><br>
+        <a href="userremove.php" onclick="verifyOption('Are you sure you want to delete this account?')">Remove Account</a><br>
         <a href="../homepage.php">Go Back</a>
-        <a href="../index.php">Log Out</a>    
+        <a href="../index.php">Switch Account</a>
+        <a href="../functions/logout.php">Log Out</a>
     </div>
-    
-    
+
+    <script>
+        function verifyOption(promptText) {
+            return confirm(promptText);
+        }
+    </script>
 </body>
 </html>
