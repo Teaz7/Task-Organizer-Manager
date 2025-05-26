@@ -99,33 +99,112 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <style>
-        /* Optional CSS for the eye icon if you use one instead of a checkbox */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #202124;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #e8eaed;
+        }
+
+        .input-form {
+            background-color: #292a2d;
+            width: 400px;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #3c4043;
+            color: white;
+            font-size: 14px;
+        }
+
+        .form-submit {
+            margin-top: 10px;
+        }
+
+        .form-submit input[type="submit"] {
+            background-color: #8ab4f8;
+            color: #000;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-submit input[type="submit"]:hover {
+            background-color: #669df6;
+            cursor: pointer;
+        }
+
+        a {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .password-container {
             position: relative;
-            display: inline-block; /* To contain the eye icon relative to the input */
+            display: inline-block;
+            width: 100%;
         }
+
         .password-toggle {
             position: absolute;
-            right: 10px; /* Adjust as needed */
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            user-select: none; /* Prevent text selection on the icon */
-            font-size: 0.9em; /* Adjust icon size */
-            color: #555;
-        }
-        /* Style for the checkbox if you use that instead */
-        .show-password-checkbox-container {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
+            user-select: none;
             font-size: 0.9em;
-            color: #555;
-        }
-        .show-password-checkbox-container input[type="checkbox"] {
-            margin-right: 5px;
+            color: #aaa;
         }
     </style>
 </head>
@@ -134,53 +213,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Reset Your Password</h2>
 
         <?php if ($message): ?>
-            <p style="color: <?= (strpos($message, 'successfully reset') !== false) ? 'green' : 'red'; ?>; font-weight: bold;"><?= htmlspecialchars($message) ?></p>
+            <p style="color: <?= (strpos($message, 'successfully reset') !== false) ? 'green' : 'red'; ?>; font-weight: bold;">
+                <?= htmlspecialchars($message) ?>
+            </p>
         <?php endif; ?>
 
         <?php if (!$showPasswordForm): ?>
             <p>Please enter your exact first name, last name, and email address as you registered them.</p>
-            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
+            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" autocomplete="off">
                 <input type="hidden" name="action" value="confirm_details">
-                <table>
-                    <tr>
-                        <td>First Name:</td>
-                        <td><input type="text" name="firstName" required></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td><input type="text" name="lastName" required></td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td><input type="email" name="email" required></td>
-                    </tr>
-                </table>
-                <div class="form-submit"><input type="submit" value="Confirm Details"></div>
+
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-submit">
+                    <input type="submit" value="Confirm Details">
+                </div>
             </form>
         <?php else: ?>
             <p>Please enter and confirm your new password.</p>
-            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" autocomplete="off">
-                <table>
-                    <tr>
-                        <td>New Password:</td>
-                        <td>
-                            <div class="password-container">
-                                <input type="password" name="new_password" id="new_password" required>
-                                <span class="password-toggle" onclick="togglePasswordVisibility('new_password', this)">Show</span>
-                                </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Confirm Password:</td>
-                        <td>
-                            <div class="password-container">
-                                <input type="password" name="confirm_password" id="confirm_password" required>
-                                <span class="password-toggle" onclick="togglePasswordVisibility('confirm_password', this)">Show</span>
-                                </div>
-                        </td>
-                    </tr>
-                </table>
-                <div class="form-submit"><input type="submit" value="Set New Password"></div>
+            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" autocomplete="off">
+                <div class="form-group">
+                    <label for="new_password">New Password:</label>
+                    <div class="password-container">
+                        <input type="password" name="new_password" id="new_password" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('new_password', this)">Show</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <div class="password-container">
+                        <input type="password" name="confirm_password" id="confirm_password" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('confirm_password', this)">Show</span>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <input type="submit" value="Set New Password">
+                </div>
             </form>
         <?php endif; ?>
 
@@ -189,7 +268,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <script>
-        // JavaScript function to toggle password visibility using a text link/span
         function togglePasswordVisibility(fieldId, toggleElement) {
             const passwordField = document.getElementById(fieldId);
             if (passwordField.type === "password") {
@@ -200,18 +278,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 toggleElement.textContent = "Show";
             }
         }
-
-        // Alternative JavaScript function for a checkbox
-        /*
-        function togglePasswordVisibilityCheckbox(fieldId, checkboxElement) {
-            const passwordField = document.getElementById(fieldId);
-            if (checkboxElement.checked) {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
-        */
     </script>
 </body>
 </html>

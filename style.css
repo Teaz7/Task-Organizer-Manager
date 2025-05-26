@@ -194,63 +194,6 @@ tbody tr td:hover {
     border: 1px rgb(232, 143, 88) solid;
 }
 
-.input-form {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-    width: 350px;
-    padding: 20px;
-}
-
-.input-form
-form input[type="text"], form input[type="submit"], 
-form input[type="checkbox"], form input[type="date"], 
-form input[type="number"], form input[type="password"], 
-form input[type="email"] {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.input-form .form-submit {
-    text-align: center;
-}
-
-a, .input-form input[type="submit"] {
-    background-color: transparent;
-    padding: 3px 40px 3px 40px;
-    border: 0.5px black solid;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-    
-a:hover, .input-form input[type="submit"]:hover {
-    background-color: rgb(66, 25, 0);
-    color: rgb(232, 143, 88);
-    cursor: pointer;
-}
-
-.input-form td {
-    height: 10px;
-    width: 200px;
-    align-items: center;
-    justify-content: center;
-    border: 0px black solid;
-    vertical-align: middle;
-    padding: 0px 5px 0px 0px;
-    text-align: right;
-}
-
-.input-form td:hover {
-    background-color: white;
-    color: black;
-}
-
-.input-form form {
-    padding: 10px;
-}
-
 .user-profile {
     line-height: 25px;
     background-color: white;

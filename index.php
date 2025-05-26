@@ -35,9 +35,9 @@
                 <div>
                     <?= $loginStatus ?>    
                 </div>
-            </div> <br>
+            </div> 
         </a>
-        
     <?php } ?>
+    <a href="signup.php">Sign Up</a>
 </body>
 </html>

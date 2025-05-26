@@ -40,25 +40,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TOM</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - TOM</title>
+  <link rel="stylesheet" href="style2.css" />
 </head>
 <body>
-    <div class="input-form">
-        <h2>TOM: Task Organizer Manager</h2>
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-            <table>
-                <tr><td>Email: </td><td><input type="text" name="loginEmail" value="<?= htmlspecialchars($displayEmail) ?>" readonly></td></tr>
-                <tr><td>Password: </td><td><input type="password" name="loginPassword" required></td></tr>
-            </table>
-            <div class="form-submit"><input type="submit" value="Login"></div>
-        </form>
+  <div class="input-form">
+    <h2>TOM: Task Organizer Manager</h2>
+    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
+      <div class="form-group">
+        <label for="loginEmail">Email:</label>
+        <input type="text" id="loginEmail" name="loginEmail" value="<?= htmlspecialchars($displayEmail) ?>" readonly>
+      </div>
 
-        <a href="index.php">Choose Another Account</a>
-        <a href="signup.php">Sign Up</a>
-        <br>
-        <a href="retrieve_password.php">Forgot Password?</a> </div>
+      <div class="form-group">
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="loginPassword" required>
+      </div>
+
+      <div class="form-submit">
+        <input type="submit" value="Login">
+      </div>
+    </form>
+    
+    <a href="index.php">Choose Another Account</a>
+    <a href="retrieve_password.php">Forgot Password?</a>
+  </div>
 </body>
 </html>
+

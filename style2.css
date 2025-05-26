@@ -1,0 +1,108 @@
+* {
+    margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #202124;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    padding: 5px 20px 5px 20px !important;
+    font-weight: bold;
+}
+
+.input-form {
+    background-color: #292a2d;
+    width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+
+.input-form h2 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: white;
+}
+
+.input-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.input-form table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-form td {
+    padding: 10px 5px;
+    text-align: left;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.input-form input[type="text"],
+.input-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #3c4043;
+    color: white;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-form input[type="text"]:read-only {
+    background-color: #3c4043;
+    opacity: 0.8;
+}
+
+.input-form .form-submit {
+    margin-top: 10px;
+}
+
+.input-form input[type="submit"] {
+    background-color: #8ab4f8;
+    color: #000;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.input-form input[type="submit"]:hover {
+    background-color: #669df6;
+    cursor: pointer;
+}
+
+.input-form a {
+    display: block;
+    margin-top: 10px;
+    color: #8ab4f8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.input-form a:hover {
+    text-decoration: underline;
+}
