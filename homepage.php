@@ -101,6 +101,49 @@
         }
     });
 </script>
+<script>
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('subtask-checkbox')) {
+        const subtaskId = e.target.dataset.subtaskId;
+        const taskId = e.target.dataset.taskId;
+        const checked = e.target.checked ? 1 : 0;
 
+        fetch('functions/updateSubtask.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `subtaskId=${subtaskId}&status=${checked}&taskId=${taskId}`
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+            // Optionally, reload task list or just update progress cell
+            location.reload(); // quick way, can optimize
+        });
+    }
+});
+</script>
+<script>
+document.querySelectorAll('.add-subtask-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const taskId = this.dataset.taskId;
+        const input = this.querySelector('input[name="subtaskName"]');
+        const subtaskName = input.value.trim();
+
+        if (!subtaskName) return;
+
+        fetch('functions/addSubtask.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `taskId=${taskId}&subtaskName=${encodeURIComponent(subtaskName)}`
+        })
+        .then(res => res.text())
+        .then(data => {
+            console.log(data);
+            location.reload();
+        });
+    });
+});
+</script>
 </body>
 </html>
