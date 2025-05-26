@@ -2,7 +2,7 @@
     include 'init.php';
     include 'functions/fetchUserId.php';
     include 'functions/table/getTable.php';
-    $selectedId = $_SESSION['selected_product_id'] ?? null;
+    $selectedId = $_SESSION['USER_selectedPetID'] ?? null;
 
     $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
     $stmt -> bindParam(":id", $id);
@@ -57,7 +57,7 @@
         <?= $defaultTable ?>
     </div>
     
-    
+ 
 <script src="virtualPet.js"></script>
 <script>
     function search(input) {
@@ -93,16 +93,56 @@
     document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
 
     window.addEventListener('DOMContentLoaded', () => {
-        let selectedImage = localStorage.getItem('selectedPetImage');
-        if (!selectedImage && <?= json_encode($selectedId) ?>) {
-            selectedImage = "image.php?id=" + <?= json_encode($selectedId) ?>;
-            localStorage.setItem('selectedPetImage', selectedImage); // sync
-        }
-        if (selectedImage) {
-            createPet({ image: selectedImage });
+        const selectedId = <?= json_encode($selectedId) ?>;
+        if (selectedId && typeof createPet === 'function') {
+            const imgUrl = `image.php?id=${selectedId}`;
+            createPet({ image: imgUrl });
         }
     });
 </script>
+<script>
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('subtask-checkbox')) {
+        const subtaskId = e.target.dataset.subtaskId;
+        const taskId = e.target.dataset.taskId;
+        const checked = e.target.checked ? 1 : 0;
 
+        fetch('functions/updateSubtask.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `subtaskId=${subtaskId}&status=${checked}&taskId=${taskId}`
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+            // Optionally, reload task list or just update progress cell
+            location.reload(); // quick way, can optimize
+        });
+    }
+});
+</script>
+<script>
+document.querySelectorAll('.add-subtask-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const taskId = this.dataset.taskId;
+        const input = this.querySelector('input[name="subtaskName"]');
+        const subtaskName = input.value.trim();
+
+        if (!subtaskName) return;
+
+        fetch('functions/addSubtask.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `taskId=${taskId}&subtaskName=${encodeURIComponent(subtaskName)}`
+        })
+        .then(res => res.text())
+        .then(data => {
+            console.log(data);
+            location.reload();
+        });
+    });
+});
+</script>
 </body>
 </html>
