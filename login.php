@@ -15,6 +15,8 @@
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            $loginError = false; 
+
             // Plain-text password comparison - DANGER: This is insecure.
             if ($user && ($user['USER_Email'] == $email) && ($user['USER_Password'] === $password)) {
                 $stmt = $conn -> prepare(
@@ -26,7 +28,7 @@
                 header('Location: homepage.php');
                 exit(); // Always exit after a header redirect
             } else {
-                echo "Invalid Username or Password";
+                $loginError = true; // Set flag instead of echo
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage(); // Changed to getMessage() for proper error string
@@ -56,7 +58,13 @@
 
       <div class="form-group">
         <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" name="loginPassword" required>
+        <input 
+          type="password" 
+          id="loginPassword" 
+          name="loginPassword" 
+          required
+          <?php if (!empty($loginError)) echo 'placeholder="Invalid Password"'; ?>
+        >
       </div>
 
       <div class="form-submit">

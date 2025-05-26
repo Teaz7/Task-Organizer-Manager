@@ -41,57 +41,7 @@ $currentRank = $rankStmt->fetchColumn();
 <head>
     <meta charset="UTF-8">
     <title>Leaderboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            margin: 0;
-            padding: 30px;
-        }
-        .leaderboard-container {
-            max-width: 600px;
-            background: white;
-            margin: auto;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-top: 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #2d3e50;
-            color: white;
-        }
-        .highlight {
-            background-color: #d1f7d1;
-            font-weight: bold;
-        }
-        .rank-info {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #2d3e50;
-        }
-    </style>
+    <link rel="stylesheet" href="../styleLeaderBoard.css">
 </head>
 <body>
 
@@ -122,7 +72,7 @@ $currentRank = $rankStmt->fetchColumn();
         <?= htmlspecialchars($currentUser['USER_FName']) ?>'s Rank: <strong>#<?= $currentRank ?></strong>
     </div>
 
-    <a class="back-link" href="userhomepage.php">← Back to User Homepage</a>
+    <a class="back-button" href="userhomepage.php">Back to Homepage</a>
 </div>
 
 </body>
