@@ -37,6 +37,7 @@
                 </div>
             </div> 
         </a>
+        <br>
     <?php } ?>
     <a href="signup.php">Sign Up</a>
 </body>

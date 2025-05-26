@@ -84,9 +84,5 @@ CREATE TABLE purchases (
     FOREIGN KEY (user_id) REFERENCES user(USER_Id),
     FOREIGN KEY (prod_id) REFERENCES product(PROD_Id)
 );
-<<<<<<< HEAD
-ALTER TABLE users ADD COLUMN USER_selectedPetID INT NULL;
-=======
 
 ALTER TABLE user ADD COLUMN USER_selectedPetID INT NULL;
->>>>>>> 93cdf7876aab44a26a49a559fb3fa8f7b9f5de3d
