@@ -1,37 +1,45 @@
-/* task design */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
 .task-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 25px;
     box-sizing: border-box;
+    align-items: stretch;
+}
+
+.task-container > * {
+    min-height: 0; /* Ensures scrollable children work in grid */
 }
 
 .task-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
     display: flex;
-}
-
-.task-card:hover {
-    transform: translateY(-5px);
+    flex-direction: column;
+    height: 500px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .progress-ring {
-    min-width: 60px;
-    height: 60px;
-}
-
-.progress-ring-circle {
-    display: block;
-    margin: auto;
+    flex-shrink: 0;
+    margin: 0 auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 svg text {
-    font-size: 14px;
+    font-size: 18px;
     dominant-baseline: middle;
     text-anchor: middle;
 }
@@ -40,14 +48,33 @@ svg text {
     transition: stroke-dashoffset 0.5s ease;
 }
 
-.task-details h3 {
-    margin-top: 40px;
-    margin-bottom: 10px;
+.task-card-content {
+    flex-grow: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
+
+.task-details {
+    flex-grow: 1;
+    overflow-y: auto; /* ✅ Scroll happens here */
+    min-height: 0;
+    padding-right: 8px;
+    scroll-behavior: smooth;
+}
+
+.task-details h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
 .priority-label1 {
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
     display: inline-block;
+    font-size: 14px;
 }
 
 .task-details .priority-label1.no-priority {
@@ -60,42 +87,54 @@ svg text {
     color: white !important;
 }
 
+.task-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.subtask-wrapper {
+    margin-top: 10px;
+    padding-right: 0;
+}
+
 .subtask-list {
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
-.subtask-list {
-    max-height: 120px; /* Adjust height as needed for 3 items */
-    overflow-y: auto;
-    padding-right: 8px; /* Optional: for scrollbar space */
+.subtask-list li {
+    font-size: 15px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
 }
-
 
 .add-subtask-form {
     display: flex;
-    gap: 5px;
-    margin-top: 10px;
+    gap: 8px;
+    margin-top: 15px;
 }
 
 .add-subtask-form input[type="text"] {
     flex: 1;
-    padding: 5px;
+    padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 .add-subtask-form button {
     background-color: #28a745;
     color: white;
     border: none;
-    padding: 6px 10px;
-    border-radius: 3px;
+    padding: 8px 15px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 18px;
 }
-.task-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
 
+.task-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 0;
 }
