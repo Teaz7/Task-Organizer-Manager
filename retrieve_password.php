@@ -114,24 +114,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .input-form {
-            background-color: #292a2d;
+            background: rgba(255, 255, 255, 0.25); 
             width: 400px;
-            padding: 40px 30px;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
         }
 
         h2 {
             margin-bottom: 10px;
+            color: #2c3e50;
             font-size: 20px;
-            font-weight: normal;
+            font-weight: 600;
         }
 
         p {
             font-size: 14px;
-            color: #bbb;
-            margin-bottom: 20px;
+            color: #000;
+            margin-bottom: 30px;
         }
 
         .form-group {
@@ -142,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         label {
             display: block;
             margin-bottom: 5px;
-            color: #ccc;
+            color: #000;
         }
 
         input[type="text"],
@@ -152,8 +156,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 10px;
             border-radius: 8px;
             border: none;
-            background-color: #3c4043;
-            color: white;
+            background-color: #f2f3f4;
+            color: #333;
             font-size: 14px;
         }
 
@@ -162,8 +166,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .form-submit input[type="submit"] {
-            background-color: #8ab4f8;
-            color: #000;
+            background-color: ##007bff;
+            color: #fff;
             border: none;
             padding: 10px;
             width: 100%;
@@ -174,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .form-submit input[type="submit"]:hover {
-            background-color: #669df6;
+            background-color: #0056b3;
             cursor: pointer;
         }
 

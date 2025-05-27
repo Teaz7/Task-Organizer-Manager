@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* soft gradient */
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.dashboard {
+    background: rgba(255, 255, 255, 0.25); 
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+.user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f3f4;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.user-card:hover {
+    background-color: #a1c4fd;
+}
+
+.user-info {
+    line-height: 1.5;
+}
+
+.status {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.signup-link {
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.signup-link:hover {
+    background-color: #0056b3;
+}
+
+.signup-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: -5px;
+    margin-bottom: 30px;
+    color: #2c3e50; 
+    text-align: center;
+}
+
