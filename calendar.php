@@ -153,9 +153,6 @@ foreach ($tasks as $task) {
                 html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
                 html += '</div>';
             }
-          // Add button to show add form
-          html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
-            html += '<div id="add-form"></div>';
             document.getElementById('modal-content').innerHTML = html;
             modalBg.style.display = 'flex';
         }
