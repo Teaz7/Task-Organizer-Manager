@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    padding: 40;
+    padding: 40px;
     background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
     background-size: cover;
     background-attachment: fixed;
