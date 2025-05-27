@@ -16,4 +16,11 @@
     } catch (PDOException $e) {
         echo "Connection failed: " . $e -> getMessage();
     }
+
+    if (!isset($_SESSION['has_refreshed'])) {
+        $_SESSION['has_refreshed'] = true;
+
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
+    }
 ?>
