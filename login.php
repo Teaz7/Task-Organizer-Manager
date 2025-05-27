@@ -7,7 +7,7 @@
         $password = $_POST["loginPassword"] ?? ''; // Using null coalescing for safety
 
         try {
-            $stmt = $conn->prepare(
+            $stmt = $slaveConn->prepare(
                 "SELECT * FROM user WHERE USER_Email = :email"
             );
             $stmt->bindParam(':email', $email);
@@ -19,7 +19,7 @@
 
             // Plain-text password comparison - DANGER: This is insecure.
             if ($user && ($user['USER_Email'] == $email) && ($user['USER_Password'] === $password)) {
-                $stmt = $conn -> prepare(
+                $stmt = $masterConn -> prepare(
                     "UPDATE user SET USER_LoginStatus=1 WHERE USER_Email=:email"
                 );
                 $stmt->bindParam(':email', $email);

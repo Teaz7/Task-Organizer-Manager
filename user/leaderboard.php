@@ -9,7 +9,7 @@ if (!$id) {
 }
 
 // Fetch current user info
-$stmt = $conn->prepare("SELECT 	USER_FName, USER_Points FROM user WHERE USER_Id = :id");
+$stmt = $slaveConn->prepare("SELECT 	USER_FName, USER_Points FROM user WHERE USER_Id = :id");
 $stmt->execute([':id' => $id]);
 $currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -18,7 +18,7 @@ if (!$currentUser) {
 }
 
 // Fetch top 10 users by points
-$topStmt = $conn->query("
+$topStmt = $slaveConn->query("
     SELECT 	USER_FName, USER_Points 
     FROM user 
     ORDER BY USER_Points DESC 
@@ -27,7 +27,7 @@ $topStmt = $conn->query("
 $topUsers = $topStmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch current user rank
-$rankStmt = $conn->prepare("
+$rankStmt = $slaveConn->prepare("
     SELECT COUNT(*) + 1 AS rank 
     FROM user 
     WHERE USER_Points > :points

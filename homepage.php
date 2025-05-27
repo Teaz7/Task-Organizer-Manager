@@ -7,7 +7,7 @@
 
     $selectedId = $_SESSION['USER_selectedPetID'] ?? null;
 
-    $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100");
+    $stmt = $slaveConn -> prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100");
     $stmt -> bindParam(":id", $id);
     $stmt -> execute();
     

@@ -1,6 +1,6 @@
     <?php
 
-    if (!isset($conn) || !isset($results)) {
+    if (!isset($slaveConn) || !isset($results)) {
         die("Database connection or task data is not available.");
     }
     ?>
@@ -22,7 +22,7 @@
                 // Fetch subtasks
                 $subtasks = [];
                 try {
-                    $subtaskStmt = $conn->prepare("SELECT SUBTASK_Id, SUBTASK_Name, SUBTASK_Status FROM subtask WHERE TASK_Id = :taskId ORDER BY SUBTASK_Id ASC");
+                    $subtaskStmt = $slaveConn->prepare("SELECT SUBTASK_Id, SUBTASK_Name, SUBTASK_Status FROM subtask WHERE TASK_Id = :taskId ORDER BY SUBTASK_Id ASC");
                     $subtaskStmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
                     $subtaskStmt->execute();
                     $subtasks = $subtaskStmt->fetchAll(PDO::FETCH_ASSOC);

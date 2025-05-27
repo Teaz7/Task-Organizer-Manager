@@ -15,9 +15,9 @@ $columns = [
 $column = $columns[$type] ?? 'TASK_Name';
 
 if ($_SESSION["taskDisplay"] == 0) {
-    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 AND $column LIKE :search");
+    $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 AND $column LIKE :search");
 } else {
-    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 AND $column LIKE :search");
+    $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 AND $column LIKE :search");
 }
 
 $stmt->bindParam(":id", $id);

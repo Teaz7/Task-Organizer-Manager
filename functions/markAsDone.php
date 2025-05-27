@@ -3,7 +3,7 @@
     include 'fetchUserId.php';
     $taskId = $_GET["id"];
 
-    $stmt = $conn -> prepare(
+    $stmt = $masterConn -> prepare(
         "INSERT INTO reward (REWARD_Points, TASK_Id, USER_Id)
         VALUES (5, :taskid, :userid);
         UPDATE user SET USER_Points = USER_Points + 50 WHERE USER_Id = :userid;

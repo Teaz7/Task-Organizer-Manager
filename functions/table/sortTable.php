@@ -14,9 +14,9 @@
 
     $orderBy = $columns[$sort] ?? 'TASK_Id';
     if ($_SESSION["taskDisplay"] == 0) {
-        $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 ORDER BY $orderBy");
+        $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 ORDER BY $orderBy");
     } else {
-        $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 ORDER BY $orderBy");
+        $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 ORDER BY $orderBy");
     }
     $stmt->bindParam(':id', $id);
     $stmt->execute();

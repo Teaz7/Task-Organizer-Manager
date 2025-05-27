@@ -12,7 +12,7 @@
             $occupation = $_POST["signUpOccupation"];
             $establishment = $_POST["signUpEstablishment"];
 
-            $stmt = $conn -> prepare(
+            $stmt = $masterConn -> prepare(
                 "INSERT INTO user
                 (USER_FName, USER_LName, USER_Password, USER_Age, USER_Email, USER_Gender, USER_Occupation, USER_Establishment)
                 VALUES
@@ -29,9 +29,9 @@
             $stmt -> bindParam(":val8", $establishment);
 
             $stmt -> execute();
-            $userId = $conn->lastInsertId();
+            $userId = $masterConn->lastInsertId();
 
-            $stmt = $conn -> prepare(
+            $stmt = $masterConn -> prepare(
                 "INSERT INTO store
                 (STORE_NumOfProducts, USER_Id) VALUES
                 (:val1, :val2);"
@@ -41,7 +41,7 @@
             $stmt -> bindParam(":val2", $userId);
             $stmt -> execute();
 
-            $stmt = $conn -> prepare(
+            $stmt = $masterConn -> prepare(
                 "INSERT INTO calendar
                 (CAL_NumOfTask, USER_Id) VALUES
                 (:val1, :val2);"

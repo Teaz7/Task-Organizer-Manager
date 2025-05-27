@@ -36,7 +36,7 @@ if (!$userId) {
 }
 
 // Check if user owns the product
-$stmt = $conn->prepare("SELECT COUNT(*) FROM purchases WHERE user_id = :user_id AND prod_id = :prod_id");
+$stmt = $slaveConn->prepare("SELECT COUNT(*) FROM purchases WHERE user_id = :user_id AND prod_id = :prod_id");
 $stmt->execute([':user_id' => $userId, ':prod_id' => $prodId]);
 $owned = $stmt->fetchColumn();
 
@@ -51,7 +51,7 @@ if (!$owned) {
 }
 
 // ✅ Save the selected pet to the database
-$stmt = $conn->prepare("UPDATE user SET USER_selectedPetID = :prod_id WHERE USER_Id = :user_id");
+$stmt = $masterConn->prepare("UPDATE user SET USER_selectedPetID = :prod_id WHERE USER_Id = :user_id");
 $stmt->execute([':prod_id' => $prodId, ':user_id' => $userId]);
 
 // ✅ Also store in session
