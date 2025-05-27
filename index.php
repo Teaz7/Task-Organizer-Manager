@@ -2,7 +2,7 @@
     include 'init.php';
     $_SESSION["currentUserEmail"] = "";
 
-    $stmt = $conn -> prepare(
+    $stmt = $slaveConn -> prepare(
         "SELECT * FROM user"
     );
     $stmt->execute();

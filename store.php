@@ -9,20 +9,20 @@ $products = [];
 $ownedProducts = [];
 
 if ($store_id > 0) {
-    $stmt = $conn->prepare("SELECT PROD_Id, PROD_Name, PROD_Amount FROM product WHERE STORE_Id = :store_id");
+    $stmt = $slaveConn->prepare("SELECT PROD_Id, PROD_Name, PROD_Amount FROM product WHERE STORE_Id = :store_id");
     if ($stmt->execute([':store_id' => $store_id])) {
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     if ($user_id) {
-        $stmt = $conn->prepare("SELECT prod_id FROM purchases WHERE user_id = :user_id");
+        $stmt = $slaveConn->prepare("SELECT prod_id FROM purchases WHERE user_id = :user_id");
         $stmt->execute([':user_id' => $user_id]);
         $ownedProducts = $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }
 
 if (!isset($_SESSION['USER_selectedPetID'])) {
-    $stmt = $conn->prepare("SELECT USER_selectedPetID FROM user WHERE USER_Id = :user_id");
+    $stmt = $slaveConn->prepare("SELECT USER_selectedPetID FROM user WHERE USER_Id = :user_id");
     $stmt->execute(['user_id' => $user_id]);
     $_SESSION['USER_selectedPetID'] = $stmt->fetchColumn();
 }

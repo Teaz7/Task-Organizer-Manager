@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = "Please enter a valid email address format.";
         } else {
             try {
-                $stmt = $conn->prepare(
+                $stmt = $slaveConn->prepare(
                     "SELECT USER_Id FROM user WHERE BINARY USER_FName = :fname AND BINARY USER_LName = :lname AND BINARY USER_Email = :email"
                 );
                 $stmt->bindParam(':fname', $firstName);
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Storing plain-text password
                 $plainTextPassword = $newPassword;
 
-                $updateStmt = $conn->prepare("UPDATE user SET USER_Password = :plainTextPassword WHERE USER_Id = :userId");
+                $updateStmt = $masterConn->prepare("UPDATE user SET USER_Password = :plainTextPassword WHERE USER_Id = :userId");
                 $updateStmt->bindParam(':plainTextPassword', $plainTextPassword);
                 $updateStmt->bindParam(':userId', $userIdToReset);
                 $updateStmt->execute();

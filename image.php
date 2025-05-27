@@ -1,8 +1,8 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "tom_db");
+include 'init.php';
 
 if (isset($_GET['id'])) {
-    $stmt = $conn->prepare("SELECT PROD_Photo FROM product WHERE PROD_Id = ?");
+    $stmt = $slaveConn->prepare("SELECT PROD_Photo FROM product WHERE PROD_Id = ?");
     $stmt->bind_param("i", $_GET['id']);
     $stmt->execute();
     $stmt->store_result();

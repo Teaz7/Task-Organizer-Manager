@@ -3,7 +3,7 @@
 // Handle delete request
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_task_id'])) {
     $deleteId = intval($_POST['delete_task_id']);
-    $stmt = $conn->prepare("DELETE FROM task WHERE TASK_Id = :id AND USER_Id = :user");
+    $stmt = $masterConn->prepare("DELETE FROM task WHERE TASK_Id = :id AND USER_Id = :user");
     $stmt->bindParam(":id", $deleteId);
     $stmt->bindParam(":user", $id);
     $stmt->execute();
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_task_id'])) {
     $start = $_POST['edit_task_start'];
     $finish = $_POST['edit_task_finish'];
     $prio = isset($_POST['edit_task_priority']) ? 'on' : '';
-    $stmt = $conn->prepare("UPDATE task SET TASK_Name=:name, TASK_Description=:desc, TASK_DateStart=:start, TASK_DateFinish=:finish, TASK_PriorityClass=:prio WHERE TASK_Id=:id AND USER_Id=:user");
+    $stmt = $masterConn->prepare("UPDATE task SET TASK_Name=:name, TASK_Description=:desc, TASK_DateStart=:start, TASK_DateFinish=:finish, TASK_PriorityClass=:prio WHERE TASK_Id=:id AND USER_Id=:user");
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":desc", $desc);
     $stmt->bindParam(":start", $start);
@@ -44,13 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_task_date'])) {
         $taskProgress = 0;
 
         // Get CAL_Id for this user
-        $stmt = $conn->prepare("SELECT CAL_Id FROM calendar WHERE USER_Id=:uid LIMIT 1");
+        $stmt = $slaveConn->prepare("SELECT CAL_Id FROM calendar WHERE USER_Id=:uid LIMIT 1");
         $stmt->bindParam(":uid", $id);
         $stmt->execute();
         $cal = $stmt->fetch(PDO::FETCH_ASSOC);
         $calId = $cal ? $cal['CAL_Id'] : null;
 
-        $stmt = $conn->prepare(
+        $stmt = $masterConn->prepare(
             "INSERT INTO task 
             (TASK_Name, TASK_Description, TASK_PriorityClass, TASK_Status, TASK_DateStart, TASK_DateFinish, TASK_Progress, CAL_Id, USER_Id)
             VALUES
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_reminder'])) {
     $reminderDate = $_POST["reminder_date"];
     $taskId = $_POST["task_id"];
 
-    $stmt = $conn->prepare(
+    $stmt = $masterConn->prepare(
         "INSERT INTO reminder (REMIND_Text, REMIND_Date, TASK_Id) VALUES (:val1, :val2, :val3)"
     );
     $stmt->bindParam(":val1", $reminderText);

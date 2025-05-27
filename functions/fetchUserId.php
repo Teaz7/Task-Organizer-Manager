@@ -5,7 +5,7 @@ if (!isset($_SESSION["currentUserEmail"])) {
 }
 $email = $_SESSION["currentUserEmail"];
 
-$stmt = $conn->prepare("SELECT * FROM user WHERE USER_Email = :email");
+$stmt = $slaveConn->prepare("SELECT * FROM user WHERE USER_Email = :email");
 $stmt->bindParam(":email", $email);
 $stmt->execute();
 $result = $stmt->fetch();
