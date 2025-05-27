@@ -14,9 +14,12 @@ $columns = [
 ];
 $column = $columns[$type] ?? 'TASK_Name';
 
-$stmt = $conn->prepare(
-    "SELECT * FROM task WHERE USER_Id = :id AND $column LIKE :search"
-);
+if ($_SESSION["taskDisplay"] == 0) {
+    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 AND $column LIKE :search");
+} else {
+    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 AND $column LIKE :search");
+}
+
 $stmt->bindParam(":id", $id);
 $stmt->bindParam(":search", $searchfilter);
 $stmt->execute();
