@@ -149,10 +149,11 @@ foreach ($tasks as $task) {
                 }
             } else {
                 html = '<div class="modal-empty">';
-                html += '<div class="no-task-label">No task for this day</div>';    
-                html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
-                html += '</div>';
+                html += '<div class="no-task-label">No task for this day</div>';
             }
+            html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
+            html += '</div>';
+            html += '<div id="add-form"></div>';
             document.getElementById('modal-content').innerHTML = html;
             modalBg.style.display = 'flex';
         }
