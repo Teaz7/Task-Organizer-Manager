@@ -1,10 +1,14 @@
 <?php 
+if (!isset($_SESSION["currentUserEmail"])) {
+    echo "Error: Unable to determine the current user.";
+    exit();
+}
 $email = $_SESSION["currentUserEmail"];
 
 $stmt = $conn->prepare("SELECT * FROM user WHERE USER_Email = :email");
 $stmt->bindParam(":email", $email);
 $stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$result = $stmt->fetch();
 
 if ($result) {
     $id = $result["USER_Id"];
@@ -13,4 +17,8 @@ if ($result) {
     // fail-safe
     $id = null;
 }
-?>
+
+if ($id === null) { 
+    echo "Error: Unable to determine the current user."; 
+    exit(); 
+}

@@ -54,12 +54,9 @@
         <a href="taskhistory.php">Task History</a>
     </div>
     <br>
-
-    <div id="searchResults">
-        <?= $defaultTable ?>
-    </div>
-    
- 
+<div id="searchResults">
+    <?= $defaultTable ?>
+</div>
 <script src="virtualPet.js"></script>
 <script>
     function search(input) {
@@ -82,15 +79,17 @@
         xhr.send();
     };
 
-    function loadSortedTable() {
+     function loadSortedTable() {
         const sortBy = document.querySelector('select[name="tableSort"]').value;
 
         fetch(`functions/table/sortTable.php?sort=${encodeURIComponent(sortBy)}`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById("searchResults").innerHTML = data;
+                initializeTaskTableInteractions('#searchResults');
             });
     }
+
 
     document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
 
