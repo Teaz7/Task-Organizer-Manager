@@ -51,6 +51,7 @@
             <option value="sortDateEnd">Task Task Finish</option>
             <option value="sortProgress">Task Progress</option>
         </select>
+        <a href="taskhistory.php">Task History</a>
     </div>
     <br>
 

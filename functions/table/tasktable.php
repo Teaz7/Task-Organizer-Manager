@@ -87,6 +87,7 @@ if (!isset($conn) || !isset($results)) {
             <input type="text" name="subtaskName" placeholder="Add subtask..." required>
             <button type="submit">➕</button>
         </form>
+        <a href="functions/markAsDone.php?id=<?= $taskId ?>">Mark As Done</a>
     </div>
 </div>
 </div>
