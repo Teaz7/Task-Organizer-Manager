@@ -44,14 +44,20 @@ svg text {
     margin-top: 40px;
     margin-bottom: 10px;
 }
+.priority-label1 {
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
 
-.priority-label {
-    font-size: 0.8em;
-    background-color: #d9534f;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    margin-left: 10px;
+.task-details .priority-label1.no-priority {
+    background-color: #6c757d !important;
+    color: white !important;
+}
+
+.task-details .priority-label1.priority {
+    background-color: #d9534f !important;
+    color: white !important;
 }
 
 .subtask-list {
@@ -60,9 +66,12 @@ svg text {
     margin: 10px 0;
 }
 
-.subtask-list li {
-    margin-bottom: 5px;
+.subtask-list {
+    max-height: 120px; /* Adjust height as needed for 3 items */
+    overflow-y: auto;
+    padding-right: 8px; /* Optional: for scrollbar space */
 }
+
 
 .add-subtask-form {
     display: flex;
