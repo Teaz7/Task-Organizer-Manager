@@ -3,13 +3,12 @@ include 'init.php';
 
 if (isset($_GET['id'])) {
     $stmt = $slaveConn->prepare("SELECT PROD_Photo FROM product WHERE PROD_Id = ?");
-    $stmt->bind_param("i", $_GET['id']);
+    $stmt->bindParam(1, $_GET['id'], PDO::PARAM_INT);
     $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($image);
-    $stmt->fetch();
 
-    if ($stmt->num_rows > 0 && $image) {
+    $image = $stmt->fetchColumn();
+
+    if ($image) {
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mimeType = $finfo->buffer($image);
         header("Content-Type: $mimeType");
