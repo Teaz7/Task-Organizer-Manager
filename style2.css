@@ -5,13 +5,14 @@
 
 body {
     margin: 0;
-    padding: 0;
-    background-color: #202124;
+    padding: 40;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    background-size: cover;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
 }
 
 a {
@@ -23,11 +24,14 @@ a {
 }
 
 .input-form {
-    background-color: #292a2d;
+    background: rgba(255, 255, 255, 0.25); 
     width: 400px;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
 }
 
@@ -35,7 +39,7 @@ a {
 .input-form h2 {
     margin-bottom: 30px;
     font-size: 22px;
-    color: white;
+    color: #2c3e50;
 }
 
 .input-form form {
@@ -52,7 +56,7 @@ a {
 .input-form td {
     padding: 10px 5px;
     text-align: left;
-    color: #ccc;
+    color: #000;
     font-size: 14px;
 }
 
@@ -62,8 +66,8 @@ a {
     padding: 10px;
     border-radius: 8px;
     border: none;
-    background-color: #3c4043;
-    color: white;
+    background-color: #f2f3f4;
+    color: #333;
     font-size: 14px;
     box-sizing: border-box;
 }
@@ -78,26 +82,26 @@ a {
 }
 
 .input-form input[type="submit"] {
-    background-color: #8ab4f8;
-    color: #000;
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
     width: 100%;
     font-weight: bold;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
     transition: background-color 0.3s ease;
 }
 
 .input-form input[type="submit"]:hover {
-    background-color: #669df6;
+    background-color: #0056b3;
     cursor: pointer;
 }
 
 .input-form a {
     display: block;
     margin-top: 10px;
-    color: #8ab4f8;
+    color: #42659d;
     text-decoration: none;
     font-size: 14px;
     transition: color 0.2s;
