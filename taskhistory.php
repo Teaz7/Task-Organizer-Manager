@@ -1,8 +1,14 @@
 <?php
     include 'init.php';
+    $_SESSION["taskDisplay"] = 1;
+
+    include 'functions/fetchUserId.php';
+    include 'functions/table/getTable.php';
+
     $stmt = $conn -> prepare(
-        "SELECT * FROM task WHERE TASK_Progress = 100"
+        "SELECT * FROM task WHERE USER_Id = :userid AND TASK_Progress = 100"
     );
+    $stmt -> bindParam(":userid", $id);
     $stmt -> execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -28,25 +34,63 @@
         </div>
     </div>
     <br>
-    <table>
-        <thead>
-            <td>Task Id</td>
-            <td>Task Name</td>
-            <td>Task Description</td>
-            <td>Task Date Start</td>
-            <td>Task Date Finish</td>
-        </thead>
-        <tbody>
-            <?php foreach($results as $res): ?>
-                <tr>
-                    <td><?= $res["TASK_Id"] ?></td>
-                    <td><?= $res["TASK_Name"] ?></td>
-                    <td><?= $res["TASK_Description"] ?></td>
-                    <td><?= $res["TASK_DateStart"] ?></td>
-                    <td><?= $res["TASK_DateFinish"] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div>
+        Search By 
+        <select id="searchType" name="searchType">
+            <option value="searchID">Task ID</option>
+            <option value="searchDescription">Task Desription</option>
+            <option value="searchName">Task Name</option>
+            <option value="searchDateStart">Task Date Start</option>
+            <option value="searchDateEnd">Task Task Finish</option>
+        </select>: 
+        <input type="text" id="searchInput" onkeyup="search(this.value)">
+        Sort By:
+        <select id="tableSort" name="tableSort">
+            <option value="sortID">Task ID</option>
+            <option value="sortName">Task Name</option>
+            <option value="sortDateStart">Task Date Start</option>
+            <option value="sortDateEnd">Task Task Finish</option>
+            <option value="sortProgress">Task Progress</option>
+        </select>
+    </div>
+    <br>
+    <div id="searchResults">
+        <?= $defaultTable ?>
+    </div>    
+
+    <script>
+        function search(input) {
+            const searchType = document.querySelector('select[name="searchType"]').value;
+            if (input.length === 0) {
+                fetch('functions/table/defaultTable.php')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("searchResults").innerHTML = data;
+                });
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById("searchResults").innerHTML = this.responseText;
+                }
+            }
+            xhr.open("GET", `functions/search.php?keyword=${encodeURIComponent(input)}&type=${encodeURIComponent(searchType)}`, true);
+            xhr.send();
+        };
+
+        function loadSortedTable() {
+            const sortBy = document.querySelector('select[name="tableSort"]').value;
+
+            fetch(`functions/table/sortTable.php?sort=${encodeURIComponent(sortBy)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("searchResults").innerHTML = data;
+                    initializeTaskTableInteractions('#searchResults');
+                });
+        }
+
+        document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
+    </script>
 </body>
 </html>

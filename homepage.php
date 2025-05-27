@@ -1,10 +1,13 @@
 <?php
     include 'init.php';
+    $_SESSION["taskDisplay"] = 0;
+
     include 'functions/fetchUserId.php';
     include 'functions/table/getTable.php';
+
     $selectedId = $_SESSION['USER_selectedPetID'] ?? null;
 
-    $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id");
+    $stmt = $conn -> prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100");
     $stmt -> bindParam(":id", $id);
     $stmt -> execute();
     
@@ -54,12 +57,9 @@
         <a href="taskhistory.php">Task History</a>
     </div>
     <br>
-
-    <div id="searchResults">
-        <?= $defaultTable ?>
-    </div>
-    
- 
+<div id="searchResults">
+    <?= $defaultTable ?>
+</div>
 <script src="virtualPet.js"></script>
 <script>
     function search(input) {
@@ -82,15 +82,17 @@
         xhr.send();
     };
 
-    function loadSortedTable() {
+     function loadSortedTable() {
         const sortBy = document.querySelector('select[name="tableSort"]').value;
 
         fetch(`functions/table/sortTable.php?sort=${encodeURIComponent(sortBy)}`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById("searchResults").innerHTML = data;
+                initializeTaskTableInteractions('#searchResults');
             });
     }
+
 
     document.querySelector('select[name="tableSort"]').addEventListener('change', loadSortedTable);
 
