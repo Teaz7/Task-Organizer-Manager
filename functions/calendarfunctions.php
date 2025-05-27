@@ -71,4 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_task_date'])) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_reminder'])) {
+    $reminderText = $_POST["reminder_text"];
+    $reminderDate = $_POST["reminder_date"];
+    $taskId = $_POST["task_id"];
+
+    $stmt = $conn->prepare(
+        "INSERT INTO reminder (REMIND_Text, REMIND_Date, TASK_Id) VALUES (:val1, :val2, :val3)"
+    );
+    $stmt->bindParam(":val1", $reminderText);
+    $stmt->bindParam(":val2", $reminderDate);
+    $stmt->bindParam(":val3", $taskId);
+    $stmt->execute();
+
+    header("Location: calendar.php?month=" . ($_GET['month'] ?? date('m')) . "&year=" . ($_GET['year'] ?? date('Y')));
+    exit;
+}
+
+
 ?>

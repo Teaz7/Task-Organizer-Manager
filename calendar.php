@@ -73,6 +73,34 @@ foreach ($tasks as $task) {
         'priority' => isset($task['TASK_PriorityClass']) ? $task['TASK_PriorityClass'] : 'N/A',
     ];
 }
+
+$tomorrow = date('Y-m-d', strtotime('+1 day'));
+$stmt = $conn->prepare("SELECT TASK_Name, TASK_DateFinish FROM task WHERE TASK_DateFinish = :tomorrow");
+$stmt->bindParam(':tomorrow', $tomorrow);
+$stmt->execute();
+$tasksDueTomorrow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$reminderTexts = [];
+
+foreach ($tasks as $task) {
+    if ($task['TASK_DateFinish'] === $tomorrow) {
+        $taskId = $task['TASK_Id'];
+        $stmt = $conn->prepare("SELECT REMIND_Text FROM reminder WHERE TASK_Id = :taskid");
+        $stmt->bindParam(":taskid", $taskId);
+        $stmt->execute();
+        $reminders = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        if ($reminders) {
+            foreach ($reminders as $reminder) {
+                $reminderTexts[] = [
+                    'task' => $task['TASK_Name'],
+                    'text' => $reminder
+                ];
+            }
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +141,9 @@ foreach ($tasks as $task) {
                     html += '<input type="hidden" name="delete_task_id" value="'+t.id+'">';
                     html += '<button type="submit">Delete</button>';
                     html += '</form>';
+                    html += '<button onclick="showReminderForm(\'' + date + '\', ' + t.id + ')">Add Reminder</button>';
                     html += '</div>';
+                    html += '<div id="reminder-form"></div>';
                     html += '<div id="edit-form-'+t.id+'"></div>';
                     html += '</div>';
                 }
@@ -169,6 +199,30 @@ foreach ($tasks as $task) {
         function hideAddForm() {
             document.getElementById('add-form').innerHTML = '';
         }
+        function showReminderForm(taskDate, taskId) {
+            var dateObj = new Date(taskDate);
+            dateObj.setDate(dateObj.getDate() - 1);
+
+            var yyyy = dateObj.getFullYear();
+            var mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+            var dd = String(dateObj.getDate()).padStart(2, '0');
+            var reminderDate = yyyy + '-' + mm + '-' + dd;
+
+            var html = '';
+            html += '<form class="reminder-form" method="POST">';
+            html += '<input type="hidden" name="add_reminder" value="1">';
+            html += '<input type="hidden" name="task_id" value="' + taskId + '">';
+            html += 'Reminder Text: <input type="text" name="reminder_text" required><br>';
+            html += 'Reminder Date: <input type="date" name="reminder_date" value="' + reminderDate + '" required><br>';
+            html += '<button type="submit">Add Reminder</button> ';
+            html += '<button type="button" onclick="hideReminderForm()">Cancel</button>';
+            html += '</form>';
+
+            document.getElementById('reminder-form').innerHTML = html;
+        }
+        function hideReminderForm() {
+            document.getElementById('reminder-form').innerHTML = '';
+        }
         function escapeHtml(text) {
             var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
             return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
@@ -176,6 +230,16 @@ foreach ($tasks as $task) {
         function escapeJs(text) {
             return String(text).replace(/'/g,"\\'").replace(/"/g,'\\"');
         }
+        window.remindersDueTomorrow = <?= json_encode($reminderTexts) ?>;
+        window.addEventListener('DOMContentLoaded', function () {
+            if (window.remindersDueTomorrow && window.remindersDueTomorrow.length > 0) {
+                let message = "🔔 Reminders for tasks due tomorrow:\n\n";
+                window.remindersDueTomorrow.forEach(item => {
+                    message += `• ${item.task}: ${item.text}\n`;
+                });
+                alert(message);
+            }
+        });
     </script>
 </head>
 <body>
