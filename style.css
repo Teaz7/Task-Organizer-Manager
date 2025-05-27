@@ -4,7 +4,9 @@
 }
 
 body {
-    background-color: rgb(255, 226, 212);
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb); 
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 a {
@@ -30,9 +32,9 @@ td {
 
 th {
     border: 0px transparent solid;
-    background-color: black;
+    background-color: #094f9b;
     height: 40px;
-    color: rgb(232, 143, 88);
+    color: #ffffff;
     vertical-align: middle;
 }
 
@@ -45,7 +47,7 @@ tbody tr td {
 }
 
 tbody tr td:hover {
-    background-color: rgb(232, 143, 88);
+    background-color: #a1c4fd;
     color: white;
 }
 
@@ -55,18 +57,20 @@ tbody tr td:hover {
     align-items: center;
     margin-bottom: 20px;
     padding: 20px 30px 0px 30px;
-    background-color: rgb(232, 143, 88);
-    height: 100px;
+    background-color: #5b8cdb;
+    height: 130px;
     flex-direction: column;
 }
 
 .heading h3, .heading h1 {
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .calendar-nav {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 10px;
     display: flexbox;
     align-items: center;
     gap: 10px;
@@ -74,32 +78,39 @@ tbody tr td:hover {
 
 .calendar-nav select, .calendar-nav button {
     font-size: 1em;
-    background-color: black;
+    background-color: #054b95;
     border: black 0px solid;
-    color: rgb(232, 143, 88);
+    border-radius: 6px;
+    color: #ffffff;
     padding: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.calendar-nav select:hover, .calendar-nav button:hover {
-    background-color: rgb(66, 25, 0);
+.calendar-nav button:hover {
+    background-color: #1f72cb;
     color: white;
 }
 
 .today-cell {
-    background: black !important;
+    background: #012d5c !important;
     border: 2px solid rgb(232, 143, 88) !important;
-    color: rgb(232, 143, 88);
+    color: rgb(255, 255, 255);
 }
 
 .priority-cell {
-    background: rgb(232, 143, 88) !important;
+    background: #3341d7 !important;
     color: white !important;
 }
 
-.today-cell:hover, .priority-cell:hover {
-    background-color: rgb(66, 25, 0) !important;
+.priority-cell:hover {
+    background-color: rgb(0, 0, 111) !important;
+    color: white !important;
+    border: 2px solid rgb(232, 143, 88) !important;
+}
+
+.today-cell:hover {
+    background-color: rgb(8, 8, 196) !important;
     color: white !important;
     border: 2px solid rgb(232, 143, 88) !important;
 }
@@ -115,6 +126,11 @@ tbody tr td:hover {
     z-index: 1000;
     justify-content: center;
     align-items: center;
+}
+
+.modal-empty {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .modal {
@@ -162,7 +178,7 @@ tbody tr td:hover {
 }
 
 .finish-date {
-    color: rgb(232, 143, 88);
+    color: #007bff;
 }
 
 .task-actions {
@@ -180,18 +196,21 @@ tbody tr td:hover {
 }
 
 .add-task-btn {
-    float: right;
+    display: flex;
+    justify-content: center;
     background-color: transparent;
     border: 1px white solid;
     color: white;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
+    margin-top: 20px; 
 }
 
+
 .add-task-btn:hover, .task-detail button:hover {
-    color: rgb(232, 143, 88);
-    border: 1px rgb(232, 143, 88) solid;
+    color: #a1c4fd;
+    border: 1px #024084 solid;
 }
 
 .user-profile {
@@ -219,4 +238,118 @@ tbody tr td:hover {
     display: inline-block;
     margin-bottom: 20px;
     margin-top: -10px;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search select,
+.search input {
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search .btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.search .btn:hover {
+  background-color: #0056b3;
+}
+
+.task-history-heading {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+  font-weight: bold;
+  color: #000000;
+}
+
+table {
+    min-width: 600px; /* This ensures your table scrolls on small screens */
+    width: 90%;
+}
+
+/* === Responsive Styling === */
+
+@media (max-width: 1024px) {
+    .heading {
+        height: auto;
+        padding: 15px;
+    }
+
+    .heading h1 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .heading div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .search-controls {
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+    }
+
+    .search select,
+    .search input,
+    .search .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .calendar-nav {
+        flex-direction: column;
+    }
+
+    .calendar-nav select,
+    .calendar-nav button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .user-profile {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+
+    .task-detail button {
+        width: 100%;
+        margin-top: 5px;
+    }
 }

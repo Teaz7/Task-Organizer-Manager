@@ -37,14 +37,14 @@ $selectedId = $_SESSION['USER_selectedPetID'];
     <link rel="stylesheet" href="styles.css" />
    <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             margin: 0;
             padding: 0;
         }
         .heading {
-            background: #2d3e50;
-            color: #fff;
+            background: #5b8cdb;
+            color: black;
             padding: 20px 30px;
             display: flex;
             justify-content: space-between;
@@ -55,33 +55,36 @@ $selectedId = $_SESSION['USER_selectedPetID'];
             font-size: 2rem;
         }
         .heading a {
-            color: #fff;
+            color: black;
             text-decoration: none;
             margin-left: 20px;
             font-weight: bold;
             transition: color 0.2s;
         }
         .heading a:hover {
-            color: #ffb347;
+            color:rgb(0, 77, 232);
         }
         .product-list {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             padding: 40px 30px;
-            justify-content: flex-start; /* Aligns items to the start */
+            justify-content: flex-start; 
         }
         .product-item {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 20px;
-            width: 220px; /* Fixed width for consistent sizing */
+            width: 220px; 
             text-align: center;
             transition: box-shadow 0.2s;
-            display: flex; /* For flex column layout */
-            flex-direction: column; /* Stack children vertically */
-            justify-content: space-between; /* Distribute space for children */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
         }
         .product-item:hover {
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
@@ -110,7 +113,7 @@ $selectedId = $_SESSION['USER_selectedPetID'];
             padding: 8px 15px;
             border: none;
             border-radius: 5px;
-            background-color: #5cb85c;
+            background-color: #007bff;
             color: white;
             cursor: pointer;
             font-size: 0.9rem;
@@ -118,23 +121,90 @@ $selectedId = $_SESSION['USER_selectedPetID'];
             margin-top: auto; /* Pushes button to the bottom if item is flex column */
         }
         .product-item button:hover {
-            background-color: #4cae4c;
+            background-color: #0056b3;
         }
         .product-item button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
-        @media (max-width: 700px) {
-            .product-list {
+        
+        @media (max-width: 1000px) {
+            .heading {
                 flex-direction: column;
-                align-items: center;
-                padding: 20px 15px; /* Adjusted padding */
+                align-items: flex-start;
+                padding: 15px;
             }
-            .product-item {
-                width: 90%; /* More responsive width */
-                margin-bottom: 20px;
+
+            .heading h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .heading div a {
+                display: inline-block;
+                margin: 5px 10px 5px 0;
             }
         }
+
+        @media (max-width: 768px) {
+            .product-list {
+                justify-content: center;
+            }
+
+            .product-item {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .product-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .product-name,
+            .product-amount {
+                font-size: 1rem;
+            }
+
+            .product-item button {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heading {
+                padding: 10px;
+            }
+
+            .heading h1 {
+                font-size: 1.2rem;
+            }
+
+            .product-list {
+                padding: 10px;
+            }
+
+            .product-img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .product-name,
+            .product-amount {
+                font-size: 0.9rem;
+            }
+
+            .product-item {
+                padding: 15px;
+            }
+
+            .product-item button {
+                width: 100%;
+                font-size: 0.8rem;
+            }
+        }
+
     </style>    
 </head>
 <body>

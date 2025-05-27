@@ -1,12 +1,13 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
     font-size: 16px;
     line-height: 1.5;
 }
 
 .task-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     padding: 25px;
     box-sizing: border-box;
@@ -18,16 +19,20 @@ body {
 }
 
 .task-card {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.25); 
     border: 1px solid #ddd;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 440px;
     box-sizing: border-box;
     overflow: hidden;
+    flex: 1 1 300px; /* allows flexible growth/shrink */
 }
 
 .progress-ring {
@@ -83,7 +88,7 @@ svg text {
 }
 
 .task-details .priority-label1.priority {
-    background-color: #d9534f !important;
+    background-color: #0056b3 !important;
     color: white !important;
 }
 
@@ -124,7 +129,7 @@ svg text {
 }
 
 .add-subtask-form button {
-    background-color: #28a745;
+    background-color: #4ea0e9;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -133,8 +138,148 @@ svg text {
     font-size: 18px;
 }
 
+.add-subtask-form button:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+}
+
 .task-wrapper {
     max-width: 1400px;
     margin: 0 auto;
     min-height: 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+.button-container {
+    text-align: center; 
+    margin-top: 20px;   
+}
+
+.task-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    min-width: 600px; /* This ensures your table scrolls on small screens */
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .heading {
+        height: auto;
+        padding: 15px;
+    }
+
+    .heading h1 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .heading div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .search-controls {
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+    }
+
+    .search select,
+    .search input,
+    .search .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .calendar-nav {
+        flex-direction: column;
+    }
+
+    .calendar-nav select,
+    .calendar-nav button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .user-profile {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+
+    .task-detail button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+        width: 90%;
+    }
+
+    .search select,
+    .search input,
+    .search .btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .heading div a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+
+    .heading h1 {
+        font-size: 1.3em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .task-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .task-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
