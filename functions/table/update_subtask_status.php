@@ -19,19 +19,19 @@ if (!$subtaskId || !$taskId) {
 
 try {
     // Update subtask status
-    $stmt = $conn->prepare("UPDATE subtask SET SUBTASK_Status = :status WHERE SUBTASK_Id = :subtaskId AND TASK_Id = :taskId");
+    $stmt = $masterConn->prepare("UPDATE subtask SET SUBTASK_Status = :status WHERE SUBTASK_Id = :subtaskId AND TASK_Id = :taskId");
     $stmt->bindParam(':status', $status, PDO::PARAM_INT);
     $stmt->bindParam(':subtaskId', $subtaskId, PDO::PARAM_INT);
     $stmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
     $stmt->execute();
 
     // Recalculate progress for the parent task
-    $totalStmt = $conn->prepare("SELECT COUNT(*) FROM subtask WHERE TASK_Id = :taskId");
+    $totalStmt = $slaveConn->prepare("SELECT COUNT(*) FROM subtask WHERE TASK_Id = :taskId");
     $totalStmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
     $totalStmt->execute();
     $total = $totalStmt->fetchColumn();
 
-    $completedStmt = $conn->prepare("SELECT COUNT(*) FROM subtask WHERE TASK_Id = :taskId AND SUBTASK_Status = 1");
+    $completedStmt = $slaveConn->prepare("SELECT COUNT(*) FROM subtask WHERE TASK_Id = :taskId AND SUBTASK_Status = 1");
     $completedStmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
     $completedStmt->execute();
     $completed = $completedStmt->fetchColumn();
@@ -39,7 +39,7 @@ try {
     $progress = ($total > 0) ? round(($completed / $total) * 100) : 0;
 
     // Update task progress
-    $updateTask = $conn->prepare("UPDATE task SET TASK_Progress = :progress WHERE TASK_Id = :taskId");
+    $updateTask = $masterConn->prepare("UPDATE task SET TASK_Progress = :progress WHERE TASK_Id = :taskId");
     $updateTask->bindParam(':progress', $progress, PDO::PARAM_INT);
     $updateTask->bindParam(':taskId', $taskId, PDO::PARAM_INT);
     $updateTask->execute();

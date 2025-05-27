@@ -17,7 +17,7 @@ if ($month < 1) {
 }
 
 // Fetch tasks
-$stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100");
+$stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100");
 $stmt->bindParam(":id", $id);
 $stmt->execute();
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -75,7 +75,7 @@ foreach ($tasks as $task) {
 }
 
 $tomorrow = date('Y-m-d', strtotime('+1 day'));
-$stmt = $conn->prepare("SELECT TASK_Name, TASK_DateFinish FROM task WHERE TASK_DateFinish = :tomorrow");
+$stmt = $slaveConn->prepare("SELECT TASK_Name, TASK_DateFinish FROM task WHERE TASK_DateFinish = :tomorrow");
 $stmt->bindParam(':tomorrow', $tomorrow);
 $stmt->execute();
 $tasksDueTomorrow = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +85,7 @@ $reminderTexts = [];
 foreach ($tasks as $task) {
     if ($task['TASK_DateFinish'] === $tomorrow) {
         $taskId = $task['TASK_Id'];
-        $stmt = $conn->prepare("SELECT REMIND_Text FROM reminder WHERE TASK_Id = :taskid");
+        $stmt = $slaveConn->prepare("SELECT REMIND_Text FROM reminder WHERE TASK_Id = :taskid");
         $stmt->bindParam(":taskid", $taskId);
         $stmt->execute();
         $reminders = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -153,7 +153,8 @@ foreach ($tasks as $task) {
                 html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
                 html += '</div>';
             }
-
+          // Add button to show add form
+          html += '<button id="add-task-btn" class="add-task-btn" onclick="this.style.display=\'none\';showAddForm(\''+date+'\')">Add Task for this day</button>';
             html += '<div id="add-form"></div>';
             document.getElementById('modal-content').innerHTML = html;
             modalBg.style.display = 'flex';

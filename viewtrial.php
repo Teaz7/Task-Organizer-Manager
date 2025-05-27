@@ -1,8 +1,8 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "tom_db");
+include 'init.php';
 
 // Query products
-$result = $conn->query("SELECT PROD_Id, PROD_Name FROM product WHERE STORE_Id = 1");
+$result = $slaveConn->query("SELECT PROD_Id, PROD_Name FROM product WHERE STORE_Id = 1");
 
 echo "<h2>Product List</h2>";
 

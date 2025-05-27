@@ -6,7 +6,7 @@
     //2: task(remove first) + store + calendar
     //3: user
     
-    $stmt = $conn -> prepare(
+    $stmt = $masterConn -> prepare(
         "DELETE FROM purchases WHERE USER_Id = :id;
                 DELETE FROM reminder WHERE TASK_Id IN (
                     SELECT TASK_Id FROM task WHERE USER_Id = :id

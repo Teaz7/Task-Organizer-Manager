@@ -3,11 +3,11 @@
     include 'init.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $email = $_SESSION["currentUserEmail"] ?? ''; // Using null coalescing for safety
+        $email = $_POST["loginEmail"] ?? ''; // Use the email from the login form
         $password = $_POST["loginPassword"] ?? ''; // Using null coalescing for safety
 
         try {
-            $stmt = $conn->prepare(
+            $stmt = $slaveConn->prepare(
                 "SELECT * FROM user WHERE USER_Email = :email"
             );
             $stmt->bindParam(':email', $email);
@@ -19,7 +19,8 @@
 
             // Plain-text password comparison - DANGER: This is insecure.
             if ($user && ($user['USER_Email'] == $email) && ($user['USER_Password'] === $password)) {
-                $stmt = $conn -> prepare(
+                $_SESSION["currentUserEmail"] = $email; // Set session for logged in user
+                $stmt = $masterConn -> prepare(
                     "UPDATE user SET USER_LoginStatus=1 WHERE USER_Email=:email"
                 );
                 $stmt->bindParam(':email', $email);
@@ -34,8 +35,8 @@
             echo "Error: " . $e->getMessage(); // Changed to getMessage() for proper error string
         }
     }
-
-    // This ensures that if currentUserEmail is not set, it defaults to empty string
+    // Show the email that was just attempted, or the session email if not set
+    $displayEmail = $_POST["loginEmail"] ?? ($_SESSION["currentUserEmail"] ?? '');
     $displayEmail = $_SESSION["currentUserEmail"] ?? '';
 ?>
 

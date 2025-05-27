@@ -84,7 +84,7 @@ CREATE TABLE purchases (
     FOREIGN KEY (user_id) REFERENCES user(USER_Id),
     FOREIGN KEY (prod_id) REFERENCES product(PROD_Id)
 );
-ALTER TABLE users ADD COLUMN USER_selectedPetID INT NULL;
+ALTER TABLE user ADD COLUMN USER_selectedPetID INT NULL;
 
 CREATE TABLE subtask (
     SUBTASK_Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -94,4 +94,75 @@ CREATE TABLE subtask (
     FOREIGN KEY (TASK_Id) REFERENCES task(TASK_Id) ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
+ALTER TABLE user ADD COLUMN USER_LoginStatus INT DEFAULT 0;
+=======
 ALTER TABLE users ADD COLUMN USER_LoginStatus INT DEFAULT 0;
+>>>>>>> c546e6dd120525c2130ef5cfb26a28689483d62d
+
+CREATE TABLE LOGS (
+    LOG_Id INT AUTO_INCREMENT PRIMARY KEY,
+    LOG_Table VARCHAR(50),
+    LOG_Action VARCHAR(10),
+    LOG_Description TEXT,
+    LOG_Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+DELIMITER $$
+
+CREATE TRIGGER after_user_insert
+AFTER INSERT ON USER
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+    VALUES ('USER', 'INSERT', CONCAT('New user added: ', NEW.USER_FName, ' ', NEW.USER_LName));
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER after_user_points_update
+AFTER UPDATE ON USER
+FOR EACH ROW
+BEGIN
+    IF OLD.USER_Points <> NEW.USER_Points THEN
+        INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+        VALUES ('USER', 'UPDATE', CONCAT('Points changed for user ID ', NEW.USER_Id, ' from ', OLD.USER_Points, ' to ', NEW.USER_Points));
+    END IF;
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+CREATE TRIGGER after_product_insert
+AFTER INSERT ON PRODUCT
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+    VALUES ('PRODUCT', 'INSERT', CONCAT('Product added: ', NEW.PROD_Name, ' in store ID ', NEW.STORE_Id));
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+<<<<<<< HEAD
+    CREATE TRIGGER after_purchase_insert
+    AFTER INSERT ON purchases
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+        VALUES ('PURCHASES', 'INSERT', CONCAT('User ID ', NEW.user_id, ' purchased product ID ', NEW.prod_id));
+    END$$
+
+    DELIMITER ;
+=======
+CREATE TRIGGER after_purchase_insert
+AFTER INSERT ON purchases
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+    VALUES ('PURCHASES', 'INSERT', CONCAT('User ID ', NEW.user_id, ' purchased product ID ', NEW.prod_id));
+END$$
+
+DELIMITER ;
+>>>>>>> c546e6dd120525c2130ef5cfb26a28689483d62d

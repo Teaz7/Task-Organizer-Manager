@@ -2,7 +2,7 @@
     include '../init.php';
 
     $_SESSION["currentUserEmail"] = $_GET['email'];
-    $stmt = $conn -> prepare(
+    $stmt = $slaveConn -> prepare(
         "SELECT * FROM user WHERE USER_Email = :email"
     );
     $stmt -> bindParam(":email", $_SESSION["currentUserEmail"]);

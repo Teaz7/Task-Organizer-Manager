@@ -5,7 +5,7 @@
     include 'functions/fetchUserId.php';
     include 'functions/table/getTable.php';
 
-    $stmt = $conn -> prepare(
+    $stmt = $slaveConn -> prepare(
         "SELECT * FROM task WHERE USER_Id = :userid AND TASK_Progress = 100"
     );
     $stmt -> bindParam(":userid", $id);

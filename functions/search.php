@@ -15,9 +15,9 @@ $columns = [
 $column = $columns[$type] ?? 'TASK_Name';
 
 if ($_SESSION["taskDisplay"] == 0) {
-    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 AND $column LIKE :search");
+    $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress < 100 AND $column LIKE :search");
 } else {
-    $stmt = $conn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 AND $column LIKE :search");
+    $stmt = $slaveConn->prepare("SELECT * FROM task WHERE USER_Id = :id AND TASK_Progress = 100 AND $column LIKE :search");
 }
 
 $stmt->bindParam(":id", $id);
@@ -43,7 +43,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // Fetch subtasks
         $subtasks = [];
         try {
-            $subtaskStmt = $conn->prepare("SELECT SUBTASK_Id, SUBTASK_Name, SUBTASK_Status FROM subtask WHERE TASK_Id = :taskId ORDER BY SUBTASK_Id ASC");
+            $subtaskStmt = $slaveConn->prepare("SELECT SUBTASK_Id, SUBTASK_Name, SUBTASK_Status FROM subtask WHERE TASK_Id = :taskId ORDER BY SUBTASK_Id ASC");
             $subtaskStmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
             $subtaskStmt->execute();
             $subtasks = $subtaskStmt->fetchAll(PDO::FETCH_ASSOC);
