@@ -36,28 +36,32 @@
     </div>
     <br>
 
-    <div>
-        Search By 
-        <select id="searchType" name="searchType">
-            <option value="searchID">Task ID</option>
-            <option value="searchDescription">Task Desription</option>
-            <option value="searchName">Task Name</option>
-            <option value="searchDateStart">Task Date Start</option>
-            <option value="searchDateEnd">Task Task Finish</option>
-        </select>: 
-        <input type="text" id="searchInput" onkeyup="search(this.value)">
-        Sort By:
-        <select id="tableSort" name="tableSort">
-            <option value="sortID">Task ID</option>
-            <option value="sortName">Task Name</option>
-            <option value="sortDateStart">Task Date Start</option>
-            <option value="sortDateEnd">Task Task Finish</option>
-            <option value="sortProgress">Task Progress</option>
-        </select>
-        <a href="taskhistory.php">Task History</a>
+    <div class="search">
+        <div class="search-controls">
+            Search By 
+            <select id="searchType" name="searchType">
+                <option value="searchID">Task ID</option>
+                <option value="searchDescription">Task Description</option>
+                <option value="searchName">Task Name</option>
+                <option value="searchDateStart">Task Date Start</option>
+                <option value="searchDateEnd">Task Finish</option>
+            </select>
+            : 
+            <input type="text" id="searchInput" onkeyup="search(this.value)">
+            Sort By:
+            <select id="tableSort" name="tableSort">
+                <option value="sortID">Task ID</option>
+                <option value="sortName">Task Name</option>
+                <option value="sortDateStart">Task Date Start</option>
+                <option value="sortDateEnd">Task Finish</option>
+                <option value="sortProgress">Task Progress</option>
+            </select>
+            <a href="taskhistory.php" class="btn">Task History</a>
+        </div>
     </div>
+
     <br>
-<div id="searchResults">
+<div class="task-table-wrapper" id="searchResults">
     <?= $defaultTable ?>
 </div>
 <script src="virtualPet.js"></script>

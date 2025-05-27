@@ -34,29 +34,36 @@
         </div>
     </div>
     <br>
-    <div>
-        Search By 
-        <select id="searchType" name="searchType">
-            <option value="searchID">Task ID</option>
-            <option value="searchDescription">Task Desription</option>
-            <option value="searchName">Task Name</option>
-            <option value="searchDateStart">Task Date Start</option>
-            <option value="searchDateEnd">Task Task Finish</option>
-        </select>: 
-        <input type="text" id="searchInput" onkeyup="search(this.value)">
-        Sort By:
-        <select id="tableSort" name="tableSort">
-            <option value="sortID">Task ID</option>
-            <option value="sortName">Task Name</option>
-            <option value="sortDateStart">Task Date Start</option>
-            <option value="sortDateEnd">Task Task Finish</option>
-            <option value="sortProgress">Task Progress</option>
-        </select>
+    <div class="search">
+        <div class="task-history-heading">Task History</div>
+
+        <div class="search-controls">
+            Search By 
+            <select id="searchType" name="searchType">
+                <option value="searchID">Task ID</option>
+                <option value="searchDescription">Task Description</option>
+                <option value="searchName">Task Name</option>
+                <option value="searchDateStart">Task Date Start</option>
+                <option value="searchDateEnd">Task Finish</option>
+            </select>
+            : 
+            <input type="text" id="searchInput" onkeyup="search(this.value)">
+            Sort By:
+            <select id="tableSort" name="tableSort">
+                <option value="sortID">Task ID</option>
+                <option value="sortName">Task Name</option>
+                <option value="sortDateStart">Task Date Start</option>
+                <option value="sortDateEnd">Task Finish</option>
+                <option value="sortProgress">Task Progress</option>
+            </select>
+        </div>
     </div>
-    <br>
+
+   
+        <br>
     <div id="searchResults">
         <?= $defaultTable ?>
-    </div>    
+    </div>
 
     <script>
         function search(input) {

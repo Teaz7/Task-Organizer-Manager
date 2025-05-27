@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
   background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-  color: #333;
+  color: #000000;
   min-height: 100vh;
 }
 

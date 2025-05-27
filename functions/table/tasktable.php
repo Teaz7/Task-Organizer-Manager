@@ -34,7 +34,7 @@
         <div class="progress-ring">
             <svg class="progress-ring-circle" width="60" height="60">
                 <circle cx="30" cy="30" r="26" stroke="#eee" stroke-width="6" fill="none"/>
-                <circle class="progress-circle" cx="30" cy="30" r="26" stroke="#28a745" stroke-width="6" fill="none"
+                <circle class="progress-circle" cx="30" cy="30" r="26" stroke="#0056b3" stroke-width="6" fill="none"
                         stroke-dasharray="163.36" stroke-dashoffset="<?= 163.36 - 163.36 * $progress / 100 ?>" />
                 <text x="30" y="35" text-anchor="middle" fill="#000" font-size="14"><?= $progress ?>%</text>
             </svg>
@@ -65,17 +65,24 @@
                             data-subtask-id="<?= $sub['SUBTASK_Id'] ?>"
                             data-task-id="<?= $taskId ?>"
                             <?= !empty($sub['SUBTASK_Status']) ? 'checked' : '' ?>>
-                        <label for="subtask-check-<?= $sub['SUBTASK_Id'] ?>">↳ <?= htmlspecialchars($sub['SUBTASK_Name']) ?></label>
+                        <label for="subtask-check-<?= $sub['SUBTASK_Id'] ?>"> <?= htmlspecialchars($sub['SUBTASK_Name']) ?></label>
                     </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
 
-            <form class="add-subtask-form" data-task-id="<?= $taskId ?>">
-                <input type="text" name="subtaskName" placeholder="Add subtask..." required>
-                <button type="submit">➕</button>
-            </form>
-            <a href="functions/markAsDone.php?id=<?= $taskId ?>">Mark As Done</a>
+           <?php if (basename($_SERVER['PHP_SELF']) != 'taskhistory.php'): ?>
+                <form class="add-subtask-form" data-task-id="<?= $taskId ?>">
+                    <input type="text" name="subtaskName" placeholder="Add subtask..." required>
+                    <button type="submit">➕</button>
+                </form>
+            <?php endif; ?>
+
+            <div class="button-container">
+                <?php if (basename($_SERVER['PHP_SELF']) != 'taskhistory.php'): ?>
+                    <a class="btn" href="functions/markAsDone.php?id=<?= $taskId ?>">Mark As Done</a>
+                <?php endif; ?>
+            </div>
     </div>
 
 
