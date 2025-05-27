@@ -1,6 +1,7 @@
 <?php
     include '../init.php';
     include '../functions/fetchUserId.php';
+    
 
     $fName = $result["USER_FName"];
     $lName = $result["USER_LName"];
@@ -44,25 +45,31 @@
     <title>Document</title>
     <link rel="stylesheet" href="../styleUser.css" />
     <link rel="stylesheet" href="../style2.css">
+    <link rel="stylesheet" href="../functions/table/tablecss.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="input-form">
-        <h2>TOM: Task Organizer Manager</h2>
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
-            <table>
-                <tr><td>First Name: </td><td><input type="text" name="editFName" value="<?= $fName ?>" required></td></tr>
-                <tr><td>Last Name: </td><td><input type="text" name="editLName" value="<?= $lName ?>" required></td></tr>
-                <tr><td>User's Age: </td><td><input type="number" name="editAge" value="<?= $age ?>" required></td></tr>
-                <tr><td>Email Address: </td><td><input type="email" name="editEmail" value="<?= $email ?>" required></td></tr>
-                <tr><td>Gender: </td><td><input type="text" name="editGender" value="<?= $gender ?>" required></td></tr>
-                <tr><td>Occupation: </td><td><input type="text" name="editOccupation" value="<?= $occupation ?>" required></td></tr>
-                <tr><td>Establishment: </td><td><input type="text" name="editEstablishment" value="<?= $establishment ?>" required></td></tr>
-            </table>
-            <div class="form-submit"><input type="submit" value="Update Account"></div>
-        </form>
-
-        <a href="userhomepage.php">Go Back</a>    
+    <div class="profile-edit-container">
+        <div class="profile-edit-card">
+            <h2>TOM: Task Organizer Manager</h2>
+            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+                <table class="profile-edit-table">
+                    <tr><td>First Name:</td><td><input type="text" name="editFName" value="<?= $fName ?>" required></td></tr>
+                    <tr><td>Last Name:</td><td><input type="text" name="editLName" value="<?= $lName ?>" required></td></tr>
+                    <tr><td>User's Age:</td><td><input type="number" name="editAge" value="<?= $age ?>" required></td></tr>
+                    <tr><td>Email Address:</td><td><input type="email" name="editEmail" value="<?= $email ?>" required></td></tr>
+                    <tr><td>Gender:</td><td><input type="text" name="editGender" value="<?= $gender ?>" required></td></tr>
+                    <tr><td>Occupation:</td><td><input type="text" name="editOccupation" value="<?= $occupation ?>" required></td></tr>
+                    <tr><td>Establishment:</td><td><input type="text" name="editEstablishment" value="<?= $establishment ?>" required></td></tr>
+                </table>
+                <div class="form-submit">
+                    <input type="submit" value="Update Account" class="profile-btn">
+                </div>
+            </form>
+            <div class="go-back">
+                <a href="userhomepage.php" class="profile-btn">Go Back</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
