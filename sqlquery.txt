@@ -94,7 +94,11 @@ CREATE TABLE subtask (
     FOREIGN KEY (TASK_Id) REFERENCES task(TASK_Id) ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
 ALTER TABLE user ADD COLUMN USER_LoginStatus INT DEFAULT 0;
+=======
+ALTER TABLE users ADD COLUMN USER_LoginStatus INT DEFAULT 0;
+>>>>>>> c546e6dd120525c2130ef5cfb26a28689483d62d
 
 CREATE TABLE LOGS (
     LOG_Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -141,6 +145,7 @@ END$$
 DELIMITER ;
 DELIMITER $$
 
+<<<<<<< HEAD
     CREATE TRIGGER after_purchase_insert
     AFTER INSERT ON purchases
     FOR EACH ROW
@@ -150,3 +155,14 @@ DELIMITER $$
     END$$
 
     DELIMITER ;
+=======
+CREATE TRIGGER after_purchase_insert
+AFTER INSERT ON purchases
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGS (LOG_Table, LOG_Action, LOG_Description)
+    VALUES ('PURCHASES', 'INSERT', CONCAT('User ID ', NEW.user_id, ' purchased product ID ', NEW.prod_id));
+END$$
+
+DELIMITER ;
+>>>>>>> c546e6dd120525c2130ef5cfb26a28689483d62d
