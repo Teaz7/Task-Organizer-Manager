@@ -20,16 +20,13 @@ if (isset($_POST['submit']) && isset($_FILES['photos'])) {
             // Optional: detect MIME type
             $mimeType = mime_content_type($tmpName);
 
-            // Insert into DB
+            // Insert into DB using PDO
             $stmt = $masterConn->prepare("INSERT INTO product (PROD_Name, PROD_Category, STORE_Id, PROD_Photo) VALUES (?, 'Pet', 1, ?)");
-            $null = NULL;
-            $stmt->bind_param("sb", $productName, $null);
-            $stmt->send_long_data(1, $imageData);
-
-            if ($stmt->execute()) {
+            if ($stmt->execute([$productName, $imageData])) {
                 echo "Uploaded: " . htmlspecialchars($fileName) . "<br>";
             } else {
-                echo "Failed to upload " . htmlspecialchars($fileName) . ": " . $stmt->error . "<br>";
+                $errorInfo = $stmt->errorInfo();
+                echo "Failed to upload " . htmlspecialchars($fileName) . ": " . htmlspecialchars($errorInfo[2]) . "<br>";
             }
         }
     }
