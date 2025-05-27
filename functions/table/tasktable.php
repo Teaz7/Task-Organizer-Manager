@@ -16,7 +16,6 @@
         <?php else: ?>
             <?php foreach ($results as $res): 
                 $taskId = $res['TASK_Id'];
-                $progress = (int)$res['TASK_Progress'];
                 $taskPrio = empty($res['TASK_PriorityClass']) ? "Default" : htmlspecialchars($res['TASK_PriorityClass']);
 
                 // Fetch subtasks
@@ -29,6 +28,21 @@
                 } catch (PDOException $e) {
                     error_log("Error fetching subtasks: " . $e->getMessage());
                 }
+                $completed = 0;
+                $total = count($subtasks);
+
+                foreach ($subtasks as $sub) {
+                    if (!empty($sub['SUBTASK_Status'])) {
+                        $completed++;
+                    }
+                }
+
+                $progress = $total > 0 ? round(($completed / $total) * 100) : 0;
+
+                $stmt = $masterConn->prepare("UPDATE task SET TASK_Progress = :progress WHERE TASK_Id = :taskId");
+                $stmt -> bindParam(":progress", $progress);
+                $stmt -> bindParam(":taskId", $taskId);
+                $stmt->execute();
             ?>
             <div class="task-card">
         <div class="progress-ring">
