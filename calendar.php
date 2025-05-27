@@ -143,7 +143,7 @@ foreach ($tasks as $task) {
                     html += '</form>';
                     html += '<button onclick="showReminderForm(\'' + date + '\', ' + t.id + ')">Add Reminder</button>';
                     html += '</div>';
-                    html += '<div id="reminder-form"></div>';
+                    html += '<div id="reminder-form-' + t.id + '"></div>';
                     html += '<div id="edit-form-'+t.id+'"></div>';
                     html += '</div>';
                 }
@@ -215,13 +215,13 @@ foreach ($tasks as $task) {
             html += 'Reminder Text: <input type="text" name="reminder_text" required><br>';
             html += 'Reminder Date: <input type="date" name="reminder_date" value="' + reminderDate + '" required><br>';
             html += '<button type="submit">Add Reminder</button> ';
-            html += '<button type="button" onclick="hideReminderForm()">Cancel</button>';
+            html += '<button type="button" onclick="hideReminderForm(' + taskId + ')">Cancel</button>';
             html += '</form>';
 
-            document.getElementById('reminder-form').innerHTML = html;
+            document.getElementById('reminder-form-' + taskId).innerHTML = html;
         }
-        function hideReminderForm() {
-            document.getElementById('reminder-form').innerHTML = '';
+        function hideReminderForm(taskId) {
+            document.getElementById('reminder-form-' + taskId).innerHTML = '';
         }
         function escapeHtml(text) {
             var map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};

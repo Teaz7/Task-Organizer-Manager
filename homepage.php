@@ -38,7 +38,7 @@
 
     <div class="search">
         <div class="search-controls">
-            Search By 
+            Search By: 
             <select id="searchType" name="searchType">
                 <option value="searchID">Task ID</option>
                 <option value="searchDescription">Task Description</option>
@@ -46,7 +46,6 @@
                 <option value="searchDateStart">Task Date Start</option>
                 <option value="searchDateEnd">Task Finish</option>
             </select>
-            : 
             <input type="text" id="searchInput" onkeyup="search(this.value)">
             Sort By:
             <select id="tableSort" name="tableSort">
