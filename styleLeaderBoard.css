@@ -1,19 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(to right, #f4f6f8, #e9ecf0);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', monospace;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    background-size: cover;
+    background-attachment: fixed;
     margin: 0;
-    padding: 40px 20px;
-    color: #2c3e50;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .leaderboard-container {
     max-width: 700px;
     margin: auto;
-    background: #ffffffcc;
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 40px 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    padding: 40px 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
 }
 
@@ -49,15 +60,16 @@ th, td {
 
 tbody tr {
     border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
     transition: background 0.3s ease;
 }
 
 tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #a1c4fd;
 }
 
 .highlight {
-    background-color: #e8fbe8 !important;
+    background-color: #65a3e6 !important;
     font-weight: 600;
 }
 
@@ -71,7 +83,7 @@ tbody tr:hover {
     display: inline-block;
     margin-top: 30px;
     padding: 12px 24px;
-    background-color: #3498db;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     font-size: 16px;
@@ -81,7 +93,45 @@ tbody tr:hover {
 }
 
 .back-button:hover {
-    background-color: #2a7bbd;
+    background-color: #0056b3;
     transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .leaderboard-card {
+    padding: 25px 20px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .action-buttons a {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-card {
+    padding: 20px 15px;
+  }
+
+  th, td {
+    padding: 10px 12px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .rank-info {
+    font-size: 1rem;
+  }
 }
 
