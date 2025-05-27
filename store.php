@@ -260,6 +260,41 @@ $selectedId = $_SESSION['USER_selectedPetID'];
 
 <script src="virtualPet.js"></script>
 <script>
+function showSuccessAlert(message) {
+    // Remove any existing alert
+    const oldAlert = document.getElementById('success-alert');
+    if (oldAlert) oldAlert.remove();
+
+    // Create alert div
+    const alertDiv = document.createElement('div');
+    alertDiv.id = 'success-alert';
+    alertDiv.textContent = message;
+    alertDiv.style.position = 'fixed';
+    alertDiv.style.top = '30px';
+    alertDiv.style.right = '30px';
+    alertDiv.style.background = 'linear-gradient(90deg, #4caf50, #81c784)';
+    alertDiv.style.color = '#fff';
+    alertDiv.style.padding = '18px 32px';
+    alertDiv.style.borderRadius = '8px';
+    alertDiv.style.boxShadow = '0 4px 16px rgba(44, 167, 80, 0.25)';
+    alertDiv.style.fontSize = '1.1rem';
+    alertDiv.style.fontWeight = 'bold';
+    alertDiv.style.zIndex = 9999;
+    alertDiv.style.opacity = '0';
+    alertDiv.style.transition = 'opacity 0.3s';
+
+    document.body.appendChild(alertDiv);
+
+    // Fade in
+    setTimeout(() => { alertDiv.style.opacity = '1'; }, 10);
+
+    // Fade out and remove after 2.5s
+    setTimeout(() => {
+        alertDiv.style.opacity = '0';
+        setTimeout(() => alertDiv.remove(), 400);
+    }, 2500);
+}
+
 function selectPet(prodId) {
     fetch('setSelectedPet.php', {
         method: 'POST',
@@ -273,7 +308,7 @@ function selectPet(prodId) {
             if (typeof createPet === 'function') {
                 createPet({ image: imgUrl });
             }
-            alert('Pet selected!');
+            showSuccessAlert('Pet selected!');
         } else {
             alert('Failed to select pet: ' + data.message);
         }
@@ -293,7 +328,7 @@ function resetPet() {
         if (pet) pet.remove();
         const speech = document.getElementById('speech');
         if (speech) speech.remove();
-        alert('Pet has been reset.');
+        showSuccessAlert('Pet has been reset.');
     });
 }
 
@@ -309,8 +344,15 @@ function buyProduct(prodId) {
     })
     .then(res => res.json())
     .then(data => {
-        alert(data.message);
-        if (data.status === 'success') location.reload();
+        if (data.status === 'success') {
+            showSuccessAlert(data.message);
+            setTimeout(() => location.reload(), 1200);
+        } else {
+            alert(data.message);
+            // Re-enable buttons if failed
+            document.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            document.querySelectorAll('.product-img').forEach(img => img.style.pointerEvents = '');
+        }
     })
     .catch(error => {
         console.error('Error buying product:', error);
