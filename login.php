@@ -53,7 +53,7 @@
     <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST">
       <div class="form-group">
         <label for="loginEmail">Email:</label>
-        <input type="text" id="loginEmail" name="loginEmail" value="<?= htmlspecialchars($displayEmail) ?>" readonly>
+        <input type="text" id="loginEmail" name="loginEmail" value=<?= htmlspecialchars($displayEmail) ?>>
       </div>
 
       <div class="form-group">
