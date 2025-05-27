@@ -30,10 +30,12 @@ if (!isset($conn) || !isset($results)) {
 <head>
     <link rel="stylesheet" href="tasktable.css">
 </head>
-<div class="task-wrapper">
+
 <div class="task-container">
     <?php if (empty($results)): ?>
+        <div class="task-wrapper">
         <div class="no-tasks">No tasks found.</div>
+        
     <?php else: ?>
         <?php foreach ($results as $res): 
             $taskId = $res['TASK_Id'];
@@ -56,12 +58,13 @@ if (!isset($conn) || !isset($results)) {
         <svg class="progress-ring-circle" width="60" height="60">
             <circle cx="30" cy="30" r="26" stroke="#eee" stroke-width="6" fill="none"/>
             <circle class="progress-circle" cx="30" cy="30" r="26" stroke="#28a745" stroke-width="6" fill="none"
-                    stroke-dasharray="163.36" stroke-dashoffset="<?= 163.36 - (163.36 * $progress / 100) ?>" />
+                    stroke-dasharray="163.36" stroke-dashoffset="<?= 163.36 - 163.36 * $progress / 100 ?>" />
             <text x="30" y="35" text-anchor="middle" fill="#000" font-size="14"><?= $progress ?>%</text>
         </svg>
     </div>
     <div class="task-details">
         <h3><?= htmlspecialchars($res['TASK_Name']) ?></h3>
+        <p><strong>Priority:</strong> <?= ($res['TASK_PriorityClass'] === 'on') ? 'Yes' : 'No' ?></p> <?= htmlspecialchars($res['TASK_PriorityClass']) ?></small> -->
         <p><strong>Description:</strong><br><?= nl2br(htmlspecialchars($res['TASK_Description'])) ?></p>
         <p><strong>Status:</strong> <?= htmlspecialchars($res['TASK_Status']) ?></p>
         <p><strong>Start:</strong> <?= htmlspecialchars($res['TASK_DateStart']) ?> |
@@ -88,15 +91,15 @@ if (!isset($conn) || !isset($results)) {
             <button type="submit">➕</button>
         </form>
         <a href="functions/markAsDone.php?id=<?= $taskId ?>">Mark As Done</a>
-    </div>
 </div>
-</div>
+
  
         </div>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-
+</div>
+</div>
 <script>
 // This script block would ideally be part of the main page (e.g., homepage.php)
 // and use event delegation if the table content is dynamically reloaded (e.g., by search/sort).

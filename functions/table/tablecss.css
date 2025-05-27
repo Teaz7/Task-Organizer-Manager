@@ -14,7 +14,6 @@
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     display: flex;
-    flex-direction: column;
 }
 
 .task-card:hover {
@@ -89,4 +88,5 @@ svg text {
 .task-wrapper {
     max-width: 1200px;
     margin: 0 auto;
+
 }
